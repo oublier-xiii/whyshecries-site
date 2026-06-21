@@ -1038,13 +1038,9 @@ footer .copy{
 .reveal.in{ opacity: 1; transform: none; }
 
 /* ============ a11y: reduced motion ============ */
-@media (prefers-reduced-motion: reduce){
-  *, *::before, *::after{
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
-    scroll-behavior: auto !important;
-  }
+/* REMOVED old rule that killed all animations. See "preserve-loops" below. */
+  .reveal, .reveal.reveal-pending{ opacity: 1; transform: none; }
+}
   .reveal{ opacity: 1; transform: none; }
   .ticker .track{ animation: none; }
   .hero .logo-wrap img{ animation: none; }

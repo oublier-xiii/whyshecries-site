@@ -1,0 +1,2306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WhySheCries — Alternative Techno · Berlin · Lisbon</title>
+<meta name="description" content="WhySheCries is a Portuguese-born alternative techno producer based in Berlin and Lisbon. Slow, heavy, ritualistic sound for the long hours after midnight. Listen, book, press.">
+<meta name="theme-color" content="#0b0606">
+<meta name="color-scheme" content="dark">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="WhySheCries — Alternative Techno">
+<meta property="og:description" content="Alternative techno producer. Berlin · Lisbon. New single In Nature There's No Tragedy — out now on Ostgut Ton.">
+<meta property="og:image" content="https://whyshecries-site.vercel.app/assets/cover-art.jpeg">
+<meta property="og:url" content="https://whyshecries-site.vercel.app/">
+<meta property="og:site_name" content="WhySheCries">
+<meta property="og:locale" content="en_US">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WhySheCries — Alternative Techno">
+<meta name="twitter:description" content="Alternative techno producer. Berlin · Lisbon. New single In Nature There's No Tragedy — out now.">
+<meta name="twitter:image" content="https://whyshecries-site.vercel.app/assets/cover-art.jpeg">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230b0606'/%3E%3Ctext x='50' y='66' font-family='Cinzel,serif' font-size='52' font-weight='600' fill='%23c41e22' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preload" as="image" href="assets/logo.png">
+<link rel="canonical" href="https://whyshecries-site.vercel.app/">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MusicGroup",
+  "name": "WhySheCries",
+  "genre": ["Alternative Techno", "Ritual Techno", "Experimental Electronic"],
+  "foundingLocation": "Lisbon, Portugal",
+  "url": "https://whyshecries-site.vercel.app/",
+  "image": "https://whyshecries-site.vercel.app/assets/cover-art.jpeg",
+  "description": "Portuguese-born alternative techno producer based in Berlin and Lisbon. Slow, heavy, ritualistic sound.",
+  "album": [
+    {"@type": "MusicAlbum", "name": "Saint Hours", "datePublished": "2024", "byArtist": {"@type": "MusicGroup", "name": "WhySheCries"}}
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- wavesurfer.js 7.8.6 (audio waveform player) -->
+<script src="https://cdn.jsdelivr.net/npm/wavesurfer.js@7.8.6/dist/wavesurfer.min.js" defer></script>
+
+<style>
+:root{
+  --ink:#0b0606;
+  --ink-2:#140a08;
+  --bone:#ece0cb;
+  --bone-2:#dccdb2;
+  --paper:#e8dcc4;
+  --blood:#8a0d10;
+  --ember:#c41e22;
+  --rust:#5e1414;
+  --ash:#3a2622;
+
+  --t-display: clamp(72px, 14vw, 240px);
+  --t-h1: clamp(56px, 9vw, 160px);
+  --t-h2: clamp(40px, 5.6vw, 96px);
+  --t-h3: clamp(24px, 2.6vw, 44px);
+  --t-lede: clamp(22px, 2vw, 36px);
+  --t-body: clamp(17px, 1.15vw, 21px);
+  --t-mono: clamp(11px, .82vw, 14px);
+
+  --pad-x: clamp(24px, 6vw, 110px);
+}
+
+*{ box-sizing: border-box; margin: 0; padding: 0; }
+html, body{
+  background: var(--ink);
+  color: var(--bone);
+  font-family:"EB Garamond", serif;
+  font-size: var(--t-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img{ display:block; max-width:100%; }
+a{ color: inherit; text-decoration: none; }
+
+/* ============ global grain + vignette overlays ============ */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,.18) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: overlay;
+  opacity: .55;
+  z-index: 900;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background: radial-gradient(120% 80% at 50% 50%, transparent 50%, rgba(0,0,0,.55) 100%);
+  z-index: 901;
+}
+
+/* ============ typography ============ */
+.cinzel{ font-family:"Cinzel", serif; }
+.mono{
+  font-family:"JetBrains Mono", monospace;
+  font-size: var(--t-mono);
+  letter-spacing: .32em;
+  text-transform: uppercase;
+}
+.italic{ font-family:"EB Garamond", serif; font-style: italic; }
+.eyebrow{
+  font-family:"JetBrains Mono", monospace;
+  font-size: var(--t-mono);
+  letter-spacing: .42em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+.dim{ color: rgba(236,224,203,.55); }
+.bone{ color: var(--bone); }
+.blood{ color: var(--ember); }
+h1, h2, h3{
+  font-family:"Cinzel", serif;
+  font-weight: 600;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--bone);
+  line-height: .98;
+}
+.em-italic{
+  font-family:"EB Garamond", serif;
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ember);
+}
+
+/* ============ shared section frame ============ */
+section{ position: relative; }
+.frame-pad{ padding: clamp(80px, 10vw, 160px) var(--pad-x); position: relative; }
+.section-frame{
+  position: absolute;
+  inset: clamp(28px, 3vw, 56px);
+  border: 1px solid rgba(236,224,203,.16);
+  pointer-events: none;
+  z-index: 1;
+}
+.section-runner{
+  position: absolute;
+  top: clamp(40px, 4.4vw, 80px);
+  left: clamp(60px, 6.5vw, 130px);
+  right: clamp(60px, 6.5vw, 130px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  color: rgba(236,224,203,.5);
+}
+.section-foot{
+  position: absolute;
+  bottom: clamp(36px, 3.6vw, 64px);
+  left: clamp(60px, 6.5vw, 130px);
+  right: clamp(60px, 6.5vw, 130px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+  color: rgba(236,224,203,.45);
+}
+.section-foot .rule{
+  flex: 1; height: 1px; background: rgba(236,224,203,.18);
+  margin: 0 28px;
+}
+.inner{ position: relative; z-index: 3; }
+
+/* ============ NAV ============ */
+nav.top{
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 800;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px clamp(28px, 4vw, 56px);
+  backdrop-filter: blur(14px);
+  background: linear-gradient(180deg, rgba(11,6,6,.85), rgba(11,6,6,.4) 70%, transparent);
+  transition: background .3s, padding .3s;
+}
+nav.top.scrolled{
+  background: rgba(11,6,6,.92);
+  padding-top: 16px; padding-bottom: 16px;
+  border-bottom: 1px solid rgba(236,224,203,.1);
+}
+nav.top .brand{
+  display: flex; align-items: center; gap: 14px;
+  font-family:"Cinzel", serif;
+  font-size: 18px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+nav.top .brand img{
+  width: 42px; height: 42px; object-fit: contain;
+  filter: invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%);
+}
+nav.top ul{
+  display: flex; gap: clamp(20px, 2.6vw, 44px); list-style: none;
+}
+nav.top ul a{
+  font-family:"JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(236,224,203,.7);
+  transition: color .2s;
+}
+nav.top ul a:hover{ color: var(--ember); }
+nav.top .cta{
+  font-family:"JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--bone);
+  border: 1px solid var(--ember);
+  padding: 12px 22px;
+  transition: background .2s, color .2s;
+  cursor: pointer;
+}
+nav.top .cta:hover{ background: var(--ember); color: var(--ink); }
+
+/* ============ hamburger menu (mobile) ============ */
+nav.top .burger{
+  display: none;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--bone);
+}
+nav.top .burger svg{ width: 24px; height: 24px; display: block; }
+nav.top .burger .close{ display: none; }
+nav.top[data-open] .burger .open{ display: none; }
+nav.top[data-open] .burger .close{ display: block; }
+
+.mobile-menu{
+  position: fixed; inset: 0;
+  z-index: 799;
+  background: rgba(11,6,6,.97);
+  backdrop-filter: blur(18px);
+  padding: 100px clamp(28px, 6vw, 60px) 40px;
+  display: flex; flex-direction: column;
+  opacity: 0; pointer-events: none;
+  visibility: hidden;
+  transition: opacity .25s, visibility 0s .25s;
+}
+.mobile-menu[data-open="true"]{
+  opacity: 1; pointer-events: auto;
+  visibility: visible;
+  transition: opacity .25s, visibility 0s 0s;
+}
+.mobile-menu ul{
+  list-style: none;
+  display: flex; flex-direction: column;
+  gap: clamp(20px, 4vw, 36px);
+  margin-bottom: 40px;
+}
+.mobile-menu a{
+  font-family:"Cinzel", serif;
+  font-size: clamp(28px, 6vw, 44px);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--bone);
+  display: inline-block;
+  transition: color .2s;
+}
+.mobile-menu a:hover{ color: var(--ember); }
+.mobile-menu .booking-cta{
+  font-family:"JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--bone);
+  border: 1px solid var(--ember);
+  padding: 14px 24px;
+  align-self: flex-start;
+  transition: background .2s, color .2s;
+}
+.mobile-menu .booking-cta:hover{ background: var(--ember); color: var(--ink); }
+
+@media (max-width: 900px){
+  nav.top ul{ display: none; }
+  nav.top .cta{ display: none; }
+  nav.top .burger{ display: inline-flex; }
+  nav.top[data-open] .brand{ opacity: .4; }
+  body.no-scroll{ overflow: hidden; }
+}
+
+/* ============ HERO ============ */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  background:
+    radial-gradient(80% 70% at 30% 40%, #260507 0%, #120304 55%, #060202 100%);
+  overflow: hidden;
+}
+.hero::before{
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,180,170,.04) 0 2px, transparent 2px 14px);
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+.hero .left{
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+  padding: 120px 60px 80px;
+}
+.hero .logo-wrap{
+  width: min(540px, 88%);
+  aspect-ratio: 1.15 / 1;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.hero .logo-wrap img{
+  width: 100%; height: 100%; object-fit: contain;
+  filter:
+    invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%)
+    drop-shadow(0 0 60px rgba(196,30,34,.45));
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%, 100%{ filter: invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%) drop-shadow(0 0 40px rgba(196,30,34,.35)); }
+  50%{ filter: invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%) drop-shadow(0 0 80px rgba(196,30,34,.65)); }
+}
+.hero .right{
+  position: relative; z-index: 2;
+  padding: 140px 80px 80px 40px;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.hero .marquee{
+  font-family:"Cinzel", serif;
+  font-weight: 700;
+  font-size: var(--t-display);
+  line-height: .88;
+  letter-spacing: .015em;
+  text-transform: uppercase;
+  color: var(--bone);
+  overflow-wrap: break-word;
+  word-break: break-word;
+  hyphens: none;
+}
+.hero .marquee .em{
+  color: var(--ember);
+  font-family:"EB Garamond", serif;
+  font-style: italic;
+  font-weight: 500;
+}
+.hero .tag-top{
+  margin-bottom: 48px;
+  color: rgba(236,224,203,.6);
+}
+.hero .meta{
+  display: flex; justify-content: space-between; align-items: end;
+  margin-top: 56px;
+}
+.hero .meta .lbl{
+  font-family:"JetBrains Mono", monospace;
+  font-size: 13px; letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(236,224,203,.6);
+  line-height: 1.8;
+}
+.hero .meta .yr{
+  font-family:"Cinzel", serif;
+  font-size: clamp(32px, 4vw, 56px);
+  letter-spacing: .14em;
+  color: var(--bone);
+}
+.hero .scroll-cue{
+  position: absolute;
+  bottom: 38px;
+  left: clamp(28px, 4vw, 60px);
+  z-index: 3;
+  font-family:"JetBrains Mono", monospace;
+  font-size: 11px; letter-spacing: .42em; text-transform: uppercase;
+  color: rgba(236,224,203,.55);
+  display: flex; align-items: center; gap: 14px;
+}
+.scroll-cue::after{
+  content: "";
+  width: 38px; height: 1px;
+  background: linear-gradient(90deg, rgba(236,224,203,.6), transparent);
+  animation: drift 2.4s ease-in-out infinite;
+}
+@keyframes drift{
+  0%, 100%{ opacity: .4; transform: scaleX(.8); transform-origin: left; }
+  50%{ opacity: 1; transform: scaleX(1.4); }
+}
+@media (max-width: 900px){
+  .hero{ grid-template-columns: 1fr; min-height: auto; min-height: auto; padding-top: 80px; }
+  .hero .left{ padding: 60px 40px 0; }
+  .hero .right{ padding: 40px 40px 80px; }
+}
+@media (max-width: 480px){
+  .hero{ padding-top: 100px; }
+  .hero .left{ padding: 40px 24px 0; }
+  .hero .right{ padding: 32px 24px 80px; }
+  .hero .tag-top{ margin-bottom: 32px; }
+  .hero .meta{ flex-direction: column; align-items: flex-start; gap: 24px; margin-top: 40px; }
+  .hero .scroll-cue{ left: 24px; bottom: 24px; }
+  .section-runner, .section-foot{ left: 28px; right: 28px; }
+}
+
+/* ============ TICKER ============ */
+.ticker{
+  position: relative;
+  background: #050202;
+  border-top: 1px solid rgba(236,224,203,.1);
+  border-bottom: 1px solid rgba(236,224,203,.1);
+  overflow: hidden;
+  padding: 22px 0;
+  z-index: 4;
+}
+.ticker .track{
+  display: flex; gap: 60px;
+  font-family:"Cinzel", serif;
+  font-size: clamp(20px, 2.4vw, 36px);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--bone);
+  white-space: nowrap;
+  animation: marquee 38s linear infinite;
+  width: max-content;
+}
+.ticker .track span:nth-child(even){ color: var(--ember); font-style: italic; font-family:"EB Garamond"; font-weight: 500;}
+.ticker .track span::after{
+  content: " ✶ ";
+  color: rgba(236,224,203,.4);
+  margin-left: 60px;
+  font-family:"EB Garamond";
+}
+@keyframes marquee{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(-50%); }
+}
+
+/* ============ ABOUT ============ */
+.about{ background: #0a0504; }
+.about .grid{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: center;
+}
+.about .imgcol{
+  position: relative;
+  aspect-ratio: 1 / 1.05;
+  overflow: hidden;
+  background: #000;
+}
+.about .imgcol img{
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.05);
+}
+.about .imgcol::after{
+  content: "";
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 80px rgba(0,0,0,.6);
+}
+.about h2{
+  font-size: var(--t-h1);
+  margin-bottom: 36px;
+}
+.about .lede{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: var(--t-lede);
+  line-height: 1.3;
+  color: var(--bone-2);
+  margin-bottom: 50px;
+  max-width: 640px;
+}
+.about .meta{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 28px 50px;
+  border-top: 1px solid rgba(236,224,203,.18);
+  padding-top: 36px;
+}
+.about .meta .k{
+  font-family:"JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 8px;
+}
+.about .meta .v{
+  font-family:"EB Garamond"; font-size: clamp(20px, 1.6vw, 26px);
+  color: var(--bone);
+}
+@media (max-width: 900px){
+  .about .grid{ grid-template-columns: 1fr; }
+}
+
+/* ============ SONIC IDENTITY ============ */
+.sonic{
+  background: linear-gradient(180deg, #0a0504 0%, #160808 100%);
+}
+.sonic .head{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: end;
+  margin-bottom: 80px;
+}
+.sonic h2{
+  font-size: var(--t-h1);
+}
+.sonic .deck{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: var(--t-lede);
+  line-height: 1.3;
+  color: var(--bone-2);
+  max-width: 560px;
+}
+.sonic .grid3{
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 4vw, 60px);
+}
+.sonic .card{
+  border-top: 1px solid rgba(236,224,203,.22);
+  padding-top: 32px;
+  position: relative;
+}
+.sonic .card .num{
+  font-family:"Cinzel", serif;
+  font-size: 18px;
+  letter-spacing: .5em;
+  color: var(--ember);
+  margin-bottom: 24px;
+}
+.sonic .card h3{
+  font-size: var(--t-h3);
+  margin-bottom: 22px;
+}
+.sonic .card p{
+  font-family:"EB Garamond";
+  font-size: var(--t-body);
+  line-height: 1.5;
+  color: rgba(236,224,203,.78);
+  margin-bottom: 24px;
+}
+.sonic .card .tags{
+  font-family:"JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(236,224,203,.5);
+}
+@media (max-width: 900px){
+  .sonic .head{ grid-template-columns: 1fr; gap: 32px; }
+  .sonic .grid3{ grid-template-columns: 1fr; }
+}
+
+/* ============ LISTEN / RELEASES ============ */
+.listen{ background: #0a0504; }
+.listen .head{
+  display: flex; justify-content: space-between; align-items: end;
+  margin-bottom: 60px;
+}
+.listen h2{ font-size: var(--t-h1); }
+.listen .tally{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .32em; text-transform: uppercase;
+  color: rgba(236,224,203,.55);
+}
+.releases{
+  display: grid; gap: 0;
+  border-top: 1px solid rgba(236,224,203,.18);
+}
+.rel{
+  display: grid;
+  grid-template-columns: 100px 1.6fr 1fr 1fr auto;
+  gap: 30px;
+  padding: 28px 0;
+  border-bottom: 1px solid rgba(236,224,203,.1);
+  align-items: center;
+  cursor: pointer;
+  transition: padding-left .25s, background .25s;
+  position: relative;
+}
+.rel:hover{
+  padding-left: 24px;
+  background: linear-gradient(90deg, rgba(196,30,34,.05), transparent 60%);
+}
+.rel:hover .play{ color: var(--ember); border-color: var(--ember); }
+.rel .year{
+  font-family:"Cinzel"; color: var(--ember);
+  font-size: clamp(18px, 1.4vw, 22px);
+  letter-spacing: .18em;
+}
+.rel .title{
+  font-family:"Cinzel"; font-weight: 600;
+  font-size: clamp(22px, 2vw, 32px);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--bone);
+}
+.rel .kind{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(236,224,203,.65);
+}
+.rel .label{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: clamp(16px, 1.2vw, 20px);
+  color: rgba(236,224,203,.75);
+}
+.rel .play{
+  width: 52px; height: 52px;
+  border: 1px solid rgba(236,224,203,.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--bone);
+  transition: all .2s;
+}
+.rel .play svg{ width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
+@media (max-width: 900px){
+  .rel{ grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+  .rel .play{ position: absolute; top: 24px; right: 0; }
+}
+
+/* ============ PRESS ============ */
+.press{ background: #090403; }
+.press .head{ margin-bottom: 64px; }
+.press h2{ font-size: var(--t-h1); }
+.press .quotes{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 5vw, 80px);
+}
+.press .q{
+  border-left: 2px solid var(--ember);
+  padding-left: 32px;
+}
+.press .q .qmark{
+  font-family:"Cinzel"; font-size: clamp(50px, 5vw, 80px);
+  color: var(--ember);
+  line-height: .5;
+  height: 30px;
+  display: block;
+}
+.press .q blockquote{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: clamp(20px, 1.8vw, 28px);
+  line-height: 1.32;
+  color: var(--bone);
+  margin-bottom: 22px;
+}
+.press .q cite{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .28em; text-transform: uppercase;
+  color: rgba(236,224,203,.55);
+  font-style: normal;
+}
+.press .q cite b{ color: var(--bone-2); font-weight: 500; }
+@media (max-width: 900px){
+  .press .quotes{ grid-template-columns: 1fr; }
+}
+
+/* ============ LIVE (full-bleed image w/ overlay) ============ */
+.live{
+  position: relative;
+  min-height: 720px;
+  background-image: url('assets/ref-ritual.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+}
+.live::before{
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.15) 35%, rgba(0,0,0,.9) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.7) 0%, transparent 50%);
+}
+.live .content{
+  position: relative;
+  z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  min-height: 720px;
+  padding: clamp(80px, 8vw, 130px) var(--pad-x);
+}
+.live h2{
+  font-size: clamp(54px, 7vw, 130px);
+  line-height: .94;
+  text-shadow: 0 4px 30px rgba(0,0,0,.8);
+}
+.live h2 .em-italic{ color: var(--ember); }
+.live p{
+  font-family:"EB Garamond";
+  font-size: clamp(20px, 1.6vw, 28px);
+  line-height: 1.4;
+  color: rgba(236,224,203,.9);
+  max-width: 540px;
+}
+.live .lbl{
+  position: absolute; top: clamp(50px, 5vw, 90px); left: var(--pad-x);
+  z-index: 3;
+  color: var(--ember);
+}
+@media (max-width: 900px){
+  .live .content{ grid-template-columns: 1fr; align-items: end; gap: 32px; }
+  .live{ background-attachment: scroll; min-height: 540px; }
+  .live .content{ min-height: 540px; }
+}
+@media (max-width: 480px){
+  .live{ min-height: 420px; }
+  .live .content{ min-height: 420px; padding: 80px var(--pad-x) 60px; }
+}
+
+/* ============ TOUR ============ */
+.tour{ background: #0a0504; }
+.tour .head{
+  display: flex; justify-content: space-between; align-items: end;
+  margin-bottom: 60px;
+}
+.tour h2{ font-size: var(--t-h1); }
+.tour .leg{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: clamp(18px, 1.4vw, 24px);
+  color: var(--bone-2);
+  text-align: right;
+}
+.tour .list{
+  border-top: 1px solid rgba(236,224,203,.18);
+}
+.date-row{
+  display: grid;
+  grid-template-columns: 180px 1fr 1.4fr auto auto;
+  gap: 30px;
+  padding: 26px 0;
+  border-bottom: 1px solid rgba(236,224,203,.1);
+  align-items: center;
+  position: relative;
+  transition: padding-left .25s, background .25s;
+}
+.date-row:hover{
+  padding-left: 22px;
+  background: linear-gradient(90deg, rgba(196,30,34,.05), transparent 70%);
+}
+.date-row .date{
+  font-family:"Cinzel"; font-size: clamp(20px, 1.6vw, 26px);
+  letter-spacing: .16em; color: var(--ember);
+  text-transform: uppercase;
+}
+.date-row .city{
+  font-family:"Cinzel"; font-weight: 600;
+  font-size: clamp(22px, 2vw, 32px);
+  letter-spacing: .06em; text-transform: uppercase;
+  color: var(--bone);
+}
+.date-row .venue{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: clamp(18px, 1.4vw, 22px);
+  color: rgba(236,224,203,.82);
+}
+.date-row .status{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: rgba(236,224,203,.6);
+  text-align: right;
+}
+.date-row .status.sold{ color: var(--ember); }
+.date-row .btn{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--bone);
+  border: 1px solid rgba(236,224,203,.3);
+  padding: 12px 22px;
+  transition: all .2s;
+  cursor: pointer;
+}
+.date-row .btn:hover{ background: var(--ember); border-color: var(--ember); color: var(--ink); }
+.date-row .btn.disabled{ opacity: .35; pointer-events: none; }
+@media (max-width: 900px){
+  .date-row{ grid-template-columns: 1fr; gap: 8px; }
+}
+
+/* ============ STAGE & VISUALS ============ */
+.stage-vis{
+  background: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 800px;
+  position: relative;
+}
+.stage-vis .imgcol{
+  position: relative; overflow: hidden;
+  background: #000;
+  min-height: 600px;
+}
+.stage-vis .imgcol img{
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.05) saturate(.95) brightness(.95);
+}
+.stage-vis .imgcol::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent 50%, rgba(10,5,4,.9) 100%);
+}
+.stage-vis .col{
+  padding: clamp(80px, 10vw, 140px) clamp(40px, 6vw, 100px) clamp(80px, 10vw, 140px) clamp(40px, 5vw, 80px);
+  background: #0a0504;
+  position: relative;
+}
+.stage-vis h2{
+  font-size: clamp(48px, 5.6vw, 88px);
+  margin: 20px 0 30px;
+}
+.stage-vis .lede{
+  font-family:"EB Garamond"; font-style: italic;
+  font-size: var(--t-lede);
+  line-height: 1.3;
+  color: var(--bone-2);
+  max-width: 540px;
+  margin-bottom: 56px;
+}
+.stage-vis ul{
+  list-style: none;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 28px 50px;
+}
+.stage-vis li{
+  border-top: 1px solid rgba(236,224,203,.2);
+  padding-top: 18px;
+}
+.stage-vis li .k{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .26em; text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 10px;
+}
+.stage-vis li .v{
+  font-family:"EB Garamond";
+  font-size: clamp(17px, 1.3vw, 20px);
+  color: var(--bone);
+  line-height: 1.35;
+}
+@media (max-width: 900px){
+  .stage-vis{ grid-template-columns: 1fr; }
+  .stage-vis ul{ grid-template-columns: 1fr; }
+}
+
+/* ============ MANTRA ============ */
+.mantra{
+  position: relative;
+  min-height: 90vh;
+  min-height: 90svh;
+  background:
+    radial-gradient(70% 60% at 50% 50%, #2a0608 0%, #0a0303 70%);
+  overflow: hidden;
+}
+.mantra::before{
+  content: "";
+  position: absolute; inset: 0;
+  background-image: url('assets/ref-red-room.jpg');
+  background-size: cover; background-position: center;
+  opacity: .35;
+  filter: contrast(1.1) saturate(1.05) brightness(.7);
+}
+.mantra::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(60% 60% at 50% 50%, rgba(0,0,0,.2) 0%, rgba(0,0,0,.85) 100%);
+}
+.mantra .center{
+  position: relative; z-index: 3;
+  min-height: 90vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  padding: 0 var(--pad-x);
+}
+.mantra .roman{
+  font-family:"Cinzel"; font-size: clamp(18px, 1.6vw, 24px);
+  letter-spacing: .5em;
+  color: var(--ember);
+  margin-bottom: 60px;
+}
+.mantra blockquote{
+  font-family:"Cinzel"; font-weight: 600;
+  font-size: clamp(48px, 8.5vw, 140px);
+  line-height: 1.05;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  color: var(--bone);
+  text-shadow: 0 6px 40px rgba(0,0,0,.7);
+  max-width: 1400px;
+}
+.mantra blockquote .em-italic{ color: var(--ember); }
+.mantra cite{
+  margin-top: 70px;
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .38em; text-transform: uppercase;
+  color: rgba(236,224,203,.7);
+  font-style: normal;
+}
+
+/* ============ CONTACT ============ */
+.contact{
+  background: #0a0504;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 700px;
+  position: relative;
+}
+.contact .left{
+  padding: clamp(80px, 10vw, 150px) clamp(40px, 6vw, 110px);
+  display: flex; flex-direction: column; justify-content: space-between;
+  gap: 60px;
+}
+.contact .right{
+  position: relative;
+  background: radial-gradient(80% 60% at 60% 50%, #2a0608 0%, #0a0303 70%);
+  display: flex; align-items: center; justify-content: center;
+}
+.contact .right::before{
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, rgba(255,180,170,.04) 0 2px, transparent 2px 14px);
+  mix-blend-mode: screen;
+}
+.contact .right .logo{
+  width: min(440px, 70%); aspect-ratio: 1.15 / 1;
+  position: relative;
+}
+.contact .right .logo img{
+  width: 100%; height: 100%; object-fit: contain;
+  filter:
+    invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%)
+    drop-shadow(0 0 60px rgba(196,30,34,.4));
+}
+.contact h2{
+  font-size: clamp(56px, 8vw, 130px);
+  margin-bottom: 50px;
+}
+.contact h2 .em-italic{ color: var(--ember); }
+.contact .grid{
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 32px 50px;
+}
+.contact .ent .k{
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(236,224,203,.55);
+  margin-bottom: 8px;
+}
+.contact .ent .v{
+  font-family:"EB Garamond";
+  font-size: clamp(17px, 1.3vw, 21px);
+  color: var(--bone);
+  line-height: 1.4;
+}
+.contact .ent .v b{ font-weight: 600; }
+.contact .ent .v a{
+  color: var(--bone-2);
+  border-bottom: 1px dashed rgba(236,224,203,.3);
+  transition: color .2s, border-color .2s;
+}
+.contact .ent .v a:hover{ color: var(--ember); border-color: var(--ember); }
+@media (max-width: 900px){
+  .contact{ grid-template-columns: 1fr; }
+  .contact .grid{ grid-template-columns: 1fr; }
+  .contact .right{ min-height: 400px; }
+}
+@media (max-width: 480px){
+  .contact .left{ padding: clamp(60px, 12vw, 100px) clamp(20px, 5vw, 28px); }
+  .contact .right{ min-height: 320px; }
+  .contact .right .logo{ width: min(280px, 60%); }
+  .stage-vis{ min-height: auto; }
+  .stage-vis .imgcol{ min-height: 380px; }
+  .stage-vis .col{ padding: 60px 24px; }
+  .stage-vis h2{ font-size: clamp(36px, 9vw, 56px); }
+  .stage-vis .lede{ font-size: clamp(18px, 4.5vw, 22px); }
+  .tour .head{ flex-direction: column; align-items: flex-start; gap: 20px; }
+  .tour .leg{ text-align: left; }
+  .date-row{ grid-template-columns: 1fr; gap: 6px; padding: 22px 0; }
+  .date-row .btn{ justify-self: flex-start; margin-top: 8px; }
+  .date-row .status{ text-align: left; }
+  .rel .play{ width: 44px; height: 44px; }
+  .press .q{ padding-left: 22px; }
+  footer .copy{ flex-direction: column; gap: 8px; }
+}
+
+/* ============ FOOTER ============ */
+footer{
+  background: #050202;
+  border-top: 1px solid rgba(236,224,203,.12);
+  padding: 60px var(--pad-x) 50px;
+}
+footer .row{
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+footer .brand{
+  display: flex; align-items: center; gap: 16px;
+  font-family:"Cinzel"; font-size: 16px;
+  letter-spacing: .24em; text-transform: uppercase;
+  color: var(--bone);
+}
+footer .brand img{
+  width: 38px; height: 38px; object-fit: contain;
+  filter: invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%);
+}
+footer .socials{
+  display: flex; gap: 32px;
+  font-family:"JetBrains Mono"; font-size: 12px;
+  letter-spacing: .3em; text-transform: uppercase;
+}
+footer .socials a{
+  color: rgba(236,224,203,.7);
+  transition: color .2s;
+}
+footer .socials a:hover{ color: var(--ember); }
+footer .copy{
+  margin-top: 40px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(236,224,203,.1);
+  font-family:"JetBrains Mono"; font-size: 11px;
+  letter-spacing: .3em; text-transform: uppercase;
+  color: rgba(236,224,203,.4);
+  display: flex; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+}
+
+/* ============ scroll-reveal ============ */
+.reveal{ opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s ease; }
+.reveal.in{ opacity: 1; transform: none; }
+
+/* ============ a11y: reduced motion ============ */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal{ opacity: 1; transform: none; }
+  .ticker .track{ animation: none; }
+  .hero .logo-wrap img{ animation: none; }
+  .scroll-cue::after{ animation: none; }
+}
+
+/* ============ a11y: skip link ============ */
+.skip-link{
+  position: absolute;
+  top: -40px; left: 8px;
+  z-index: 9999;
+  padding: 8px 14px;
+  background: var(--ember);
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; letter-spacing: .2em; text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: top .2s;
+}
+.skip-link:focus{ top: 8px; }
+
+/* ============ a11y: screen-reader-only ============ */
+.sr-only{
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ============ responsive: very large screens ============ */
+@media (min-width: 1600px){
+  .section-runner{ top: 80px; }
+  .section-foot{ bottom: 64px; }
+}
+
+/* ============ responsive: prevent horizontal scroll globally ============ */
+img, svg, video, canvas, iframe, embed, object{ max-width: 100%; }
+pre, code, table{ overflow-wrap: break-word; word-break: break-word; }
+
+/* ============ responsive: landscape mobile (short height) ============ */
+@media (max-height: 500px) and (orientation: landscape){
+  .hero{ min-height: 100svh; }
+  .hero .left, .hero .right{ padding-top: 30px; padding-bottom: 30px; }
+}
+
+/* ============ print styles ============ */
+@media print{
+  nav, .ticker, .scroll-cue, .skip-link, .mobile-menu, .section-frame, .section-runner, .section-foot{ display: none !important; }
+  body{ background: #fff !important; color: #000 !important; }
+  section{ background: #fff !important; color: #000 !important; padding: 20px 0; }
+  h1, h2, h3, p, blockquote, li{ color: #000 !important; }
+  a{ color: #000 !important; text-decoration: underline; }
+  .live{ display: none; }
+  .mantra{ min-height: auto; padding: 40px 20px; background: #fff !important; }
+  .mantra::before, .mantra::after{ display: none; }
+  #player, #cursor, #loader, .scroll-progress{ display: none !important; }
+}
+
+/* ============ custom scrollbar ============ */
+::-webkit-scrollbar{ width: 4px; height: 4px; }
+::-webkit-scrollbar-track{ background: transparent; }
+::-webkit-scrollbar-thumb{ background: rgba(196,30,34,.5); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover{ background: rgba(196,30,34,.8); }
+* { scrollbar-width: thin; scrollbar-color: rgba(196,30,34,.5) transparent; }
+
+/* ============ loading screen ============ */
+#loader{
+  position: fixed; inset: 0;
+  z-index: 9999;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  transition: opacity .8s ease, visibility 0s .8s;
+}
+#loader.hidden{ opacity: 0; visibility: hidden; pointer-events: none; }
+#loader .logo-pulse{
+  width: clamp(80px, 12vw, 140px);
+  height: clamp(80px, 12vw, 140px);
+  animation: loaderPulse 2s ease-in-out infinite;
+}
+#loader .logo-pulse img{
+  width: 100%; height: 100%; object-fit: contain;
+  filter: invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%);
+}
+#loader .loader-bar{
+  margin-top: 40px;
+  width: clamp(120px, 18vw, 200px);
+  height: 1px;
+  background: rgba(236,224,203,.1);
+  position: relative;
+  overflow: hidden;
+}
+#loader .loader-bar::after{
+  content: "";
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--ember);
+  animation: loaderBar 1.6s ease-in-out infinite;
+}
+@keyframes loaderPulse{
+  0%, 100%{ transform: scale(1); opacity: .9; }
+  50%{ transform: scale(1.08); opacity: 1; }
+}
+@keyframes loaderBar{
+  0%{ width: 0; left: 0; }
+  50%{ width: 60%; }
+  100%{ width: 0; left: 100%; }
+}
+body.loading{ overflow: hidden; }
+
+/* ============ custom cursor (DISABLED — caused UX issues) ============ */
+/* The custom cursor is removed for now. Re-enable later once we add proper
+   blend modes and z-index handling that works on all backgrounds. */
+
+/* ============ audio mini-player ============ */
+#player{
+  position: fixed;
+  bottom: 20px; right: 20px;
+  z-index: 1000;
+  width: min(360px, calc(100vw - 40px));
+  background: linear-gradient(180deg, rgba(20,8,8,.95), rgba(11,6,6,.98));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(236,224,203,.18);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-family: "JetBrains Mono", monospace;
+  color: var(--bone);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 0 0 1px rgba(196,30,34,.1);
+  transform: translateY(140%);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1);
+  user-select: none;
+}
+#player.is-open{ transform: translateY(0); }
+#player.is-playing{ border-color: rgba(196,30,34,.4); }
+#player .player-head{
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 10px;
+}
+#player .player-btn{
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--ember);
+  color: var(--ink);
+  border: 0;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+#player .player-btn:hover{ background: #d83135; transform: scale(1.05); }
+#player .player-btn:active{ transform: scale(.95); }
+#player .player-btn svg{ width: 14px; height: 14px; fill: currentColor; margin-left: 1px; }
+#player .player-btn.is-playing svg{ margin-left: 0; }
+#player .player-meta{
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 2px;
+  overflow: hidden;
+}
+#player .player-title{
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--bone);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+#player .player-artist{
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(236,224,203,.5);
+}
+#player .player-close{
+  background: transparent;
+  border: 0;
+  color: rgba(236,224,203,.6);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: color .15s ease;
+}
+#player .player-close:hover{ color: var(--ember); }
+#player .player-close svg{ width: 14px; height: 14px; }
+#player .player-waveform{
+  position: relative;
+  height: 28px;
+  margin: 4px 0 2px;
+  cursor: pointer;
+}
+#player .player-waveform canvas{ display: block; width: 100% !important; height: 100% !important; }
+#player .player-time{
+  display: flex; justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: .18em;
+  color: rgba(236,224,203,.5);
+  text-transform: uppercase;
+}
+#player .player-volume{
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(236,224,203,.08);
+}
+#player .player-volume-icon{
+  background: transparent; border: 0;
+  color: rgba(236,224,203,.6);
+  padding: 0; width: 16px; height: 16px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: color .15s ease;
+}
+#player .player-volume-icon:hover{ color: var(--ember); }
+#player .player-volume-icon svg{ width: 12px; height: 12px; fill: currentColor; }
+#player .player-volume input[type=range]{
+  -webkit-appearance: none; appearance: none;
+  flex: 1; height: 2px;
+  background: rgba(236,224,203,.18);
+  border-radius: 1px;
+  outline: none;
+}
+#player .player-volume input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance: none; appearance: none;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ember);
+  cursor: pointer;
+}
+#player .player-volume input[type=range]::-moz-range-thumb{
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--ember);
+  border: 0;
+  cursor: pointer;
+}
+#player .player-loader{
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(11,6,6,.7);
+  font-size: 9px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(236,224,203,.5);
+}
+#player.is-loading .player-loader{ display: flex; }
+#player:not(.is-loading) .player-loader{ display: none; }
+
+/* Pulsing play-button on release cards when something is playing */
+.rel.is-current .play{
+  border-color: var(--ember) !important;
+  color: var(--ember) !important;
+}
+.rel.is-current .play::after{
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--ember);
+  border-radius: 50%;
+  animation: playRing 1.6s ease-in-out infinite;
+}
+@keyframes playRing{
+  0%{ opacity: .8; transform: scale(1); }
+  100%{ opacity: 0; transform: scale(1.4); }
+}
+
+/* GSAP split-text helpers */
+.char{
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.word{
+  display: inline-block;
+  white-space: nowrap;
+  margin-right: 0.2em;
+}
+.hero .marquee .word{
+  display: block;
+  margin-right: 0;
+  overflow: hidden;
+}
+.hero .marquee .word .char{
+  display: inline-block;
+  transform: translateY(0);
+}
+.hero .marquee{ overflow: visible; }
+
+/* scroll progress bar at top of viewport */
+.scroll-progress{
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 1001;
+  pointer-events: none;
+}
+.scroll-progress::after{
+  content: "";
+  display: block;
+  height: 100%;
+  width: var(--progress, 0%);
+  background: linear-gradient(90deg, transparent, var(--ember));
+  transition: width .1s linear;
+}
+
+/* ============ CSS-based reveal animations ============ */
+/* Default: visible. Only hidden when JS adds the .reveal class + we use
+   :not(.in) for the initial fade. This way, if JS fails, content shows. */
+.reveal{
+  opacity: 1;
+  transform: none;
+  transition: opacity .9s ease, transform .9s ease;
+}
+/* When JS marks the element as .reveal-pending, hide it until .in is added */
+.reveal.reveal-pending{
+  opacity: 0;
+  transform: translateY(28px);
+}
+.reveal.in{
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance: applied via JS on page load */
+.hero-animate-in .logo-wrap{
+  animation: heroLogoIn 1.2s cubic-bezier(.2,.7,.2,1) both;
+}
+.hero-animate-in .tag-top{
+  animation: heroFadeUp .9s .2s ease both;
+}
+.hero-animate-in .marquee{
+  animation: heroFadeUp 1.1s .5s ease both;
+}
+.hero-animate-in .meta{
+  animation: heroFadeUp .9s .9s ease both;
+}
+.hero-animate-in .scroll-cue{
+  animation: heroFadeIn 1s 1.4s ease both;
+}
+@keyframes heroLogoIn{
+  from{ opacity: 0; transform: scale(.95); }
+  to{ opacity: 1; transform: scale(1); }
+}
+@keyframes heroFadeUp{
+  from{ opacity: 0; transform: translateY(20px); }
+  to{ opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+
+/* Marquee letters subtle pulse on hover */
+.hero .marquee{
+  display: inline-block;
+  transition: transform .6s ease;
+}
+.hero:hover .marquee{
+  transform: translateY(-2px);
+}
+
+/* Reduced motion: kill TRANSITIONS but keep decorative loop animations
+   (ticker, marquee, pulse, glow) running. These are non-essential visual
+   loops that don't affect accessibility. */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .reveal.reveal-pending{ opacity: 1; transform: none; }
+}
+
+/* ============ HERO letter-by-letter reveal (CSS-driven) ============ */
+.hero .marquee .hero-word{
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  line-height: .88;
+}
+.hero .marquee .hero-word.em{ font-style: italic; font-family:"EB Garamond", serif; }
+.hero .marquee .hero-char{
+  display: inline-block;
+  transform: translateY(110%);
+  opacity: 0;
+  animation: charIn 1s cubic-bezier(.2,.7,.2,1) forwards;
+  animation-delay: calc(1.4s + var(--char-i, 0) * 50ms);
+}
+@keyframes charIn{
+  to{ transform: translateY(0); opacity: 1; }
+}
+
+/* ============ hero logo continuous pulse ============ */
+.hero .logo-wrap img{
+  animation: pulse 4s ease-in-out infinite;
+}
+
+/* ============ MarQUEE text subtle hover effect ============ */
+.hero .marquee{
+  cursor: default;
+  transition: transform .6s ease, text-shadow .6s ease;
+}
+.hero .marquee:hover{
+  text-shadow: 0 0 40px rgba(196,30,34,.3);
+}
+
+/* ============ Ticker hover speed-up ============ */
+.ticker .track{
+  transition: animation-duration .4s ease;
+}
+.ticker .track:hover{
+  animation-duration: 19s !important;
+}
+
+/* ============ Tag-top subtle letter-spacing on load ============ */
+.tag-top{
+  animation: tagFadeIn 1.2s .2s ease both;
+}
+@keyframes tagFadeIn{
+  from{ opacity: 0; letter-spacing: 0; }
+  to{ opacity: 1; letter-spacing: .32em; }
+}
+
+/* ============ Scroll cue arrow drift ============ */
+.scroll-cue{
+  animation: cueFloat 3s ease-in-out infinite;
+}
+@keyframes cueFloat{
+  0%, 100%{ transform: translateX(0); }
+  50%{ transform: translateX(8px); }
+}
+
+/* ============ Section headers (h2) subtle slide-in ============ */
+section h2{
+  position: relative;
+}
+section h2::after{
+  content: "";
+  position: absolute;
+  bottom: -8px; left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--ember);
+  transition: width 1.2s .3s ease;
+}
+section.in-view h2::after{ width: 80px; }
+
+/* ============ Card hover: subtle lift ============ */
+.sonic .card{
+  transition: transform .4s ease, border-color .4s ease;
+}
+.sonic .card:hover{
+  transform: translateY(-4px);
+  border-top-color: var(--ember);
+}
+.sonic .card .play-ring{ display: none; }
+.sonic .card:hover .play-ring{ display: block; }
+
+/* ============ Press quote hover: brighten ============ */
+.press .q{
+  transition: transform .3s ease, border-color .3s ease;
+}
+.press .q:hover{
+  transform: translateX(6px);
+  border-left-color: var(--bone-2);
+}
+.press .q blockquote{
+  transition: opacity .3s ease, color .3s ease;
+}
+.press .q:hover blockquote{
+  color: #fff;
+}
+
+/* ============ Tour date row hover: lift button ============ */
+.date-row{
+  transition: padding-left .25s ease, background .25s ease;
+}
+.date-row .btn{
+  transition: background .25s ease, color .25s ease, border-color .25s ease, transform .2s ease;
+}
+.date-row:hover .btn:not(.disabled){
+  transform: translateX(4px);
+}
+
+/* ============ Contact entry hover: brighten ============ */
+.contact .ent{
+  transition: transform .3s ease;
+}
+.contact .ent:hover{
+  transform: translateX(4px);
+}
+.contact .ent .v a{
+  transition: color .2s ease, border-color .2s ease;
+}
+
+/* ============ Socials hover: underline grow ============ */
+footer .socials a{
+  position: relative;
+}
+footer .socials a::after{
+  content: "";
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--ember);
+  transition: width .3s ease;
+}
+footer .socials a:hover::after{ width: 100%; }
+
+/* ============ Nav link underline on hover ============ */
+nav.top ul a{
+  position: relative;
+}
+nav.top ul a::after{
+  content: "";
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--ember);
+  transition: width .3s ease;
+}
+nav.top ul a:hover::after{ width: 100%; }
+
+/* ============ Section reveal entrance: subtle lift ============ */
+section{
+  position: relative;
+}
+
+/* ============ Mantra: subtle flicker on letter em-italic ============ */
+.mantra .em-italic{
+  display: inline-block;
+  animation: flicker 5s ease-in-out infinite;
+}
+@keyframes flicker{
+  0%, 100%{ opacity: 1; }
+  50%{ opacity: 0.85; }
+}
+
+/* ============ Rider item hover ============ */
+.stage-vis li{
+  transition: transform .3s ease, border-top-color .3s ease;
+}
+.stage-vis li:hover{
+  transform: translateX(6px);
+  border-top-color: var(--ember);
+}
+.stage-vis li .k{ transition: color .2s ease; }
+.stage-vis li:hover .k{ color: var(--bone); }
+
+/* ============ CTA button shine sweep ============ */
+.cta, .booking-cta, .date-row .btn:not(.disabled){
+  position: relative;
+  overflow: hidden;
+}
+.cta::before, .booking-cta::before{
+  content: "";
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.15), transparent);
+  transition: left .6s ease;
+}
+.cta:hover::before, .booking-cta:hover::before{ left: 100%; }
+
+/* ============ Cover-art subtle 3D hover ============ */
+.about .imgcol img{
+  transition: transform .6s ease, filter .6s ease;
+}
+.about .imgcol:hover img{
+  transform: scale(1.04);
+  filter: contrast(1.1) saturate(1.1);
+}
+.about .imgcol{
+  transition: box-shadow .4s ease;
+}
+.about .imgcol:hover{
+  box-shadow: 0 20px 40px rgba(0,0,0,.5);
+}
+
+/* ============ Stage-vis image hover ============ */
+.stage-vis .imgcol img{
+  transition: transform 1s ease, filter .4s ease;
+}
+.stage-vis .imgcol:hover img{
+  transform: scale(1.05);
+  filter: contrast(1.15) saturate(1.1) brightness(1.05);
+}
+
+/* ============ Hero meta subtle drift on load ============ */
+.hero .meta{
+  animation: heroMetaIn 1s 1.2s ease both;
+}
+@keyframes heroMetaIn{
+  from{ opacity: 0; transform: translateX(-20px); }
+  to{ opacity: 1; transform: translateX(0); }
+}
+
+/* ============ Live section: subtle text glow on scroll into view ============ */
+.live h2{
+  animation: textGlow 3s ease-in-out infinite alternate;
+}
+@keyframes textGlow{
+  from{ text-shadow: 0 4px 30px rgba(0,0,0,.8); }
+  to{ text-shadow: 0 4px 40px rgba(196,30,34,.4), 0 4px 30px rgba(0,0,0,.8); }
+}
+
+/* ============ Mini-player entry ============ */
+#player{
+  animation: none;
+}
+#player.is-open{
+  animation: playerSlideIn .5s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes playerSlideIn{
+  from{ transform: translateY(140%) scale(.95); opacity: 0; }
+  to{ transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* ============ Cursor subtle (re-enabled with no-op) ============ */
+/* Custom cursor removed but leaving this stub in case we re-enable. */
+
+/* ============ Smooth focus rings (a11y) ============ */
+a:focus-visible, button:focus-visible{
+  outline: 1px solid var(--ember);
+  outline-offset: 4px;
+  transition: outline-offset .2s ease;
+}
+
+/* ============ Selection color ============ */
+::selection{
+  background: var(--ember);
+  color: var(--ink);
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ============ NAV ============ -->
+<nav class="top" id="topnav" aria-label="Primary">
+  <a href="#top" class="brand" aria-label="WhySheCries — home">
+    <img src="assets/logo.png" alt="" role="presentation" width="42" height="42">
+    <span>WhySheCries</span>
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#sound">Sound</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#press">Press</a></li>
+    <li><a href="#tour">Tour</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="cta">Booking</a>
+  <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <svg class="open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    <svg class="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" data-open="false">
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#sound">Sound</a></li>
+    <li><a href="#listen">Listen</a></li>
+    <li><a href="#press">Press</a></li>
+    <li><a href="#tour">Tour</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="booking-cta">Booking &amp; Press</a>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="left">
+    <div class="logo-wrap">
+      <img src="assets/logo.png" alt="WhySheCries logo, stylized W with red accents" width="540" height="470" decoding="async">
+    </div>
+  </div>
+  <div class="right">
+    <div>
+      <div class="mono tag-top">In nature&nbsp;&nbsp;//&nbsp;&nbsp;there's no tragedy</div>
+      <div class="marquee">
+        Why<br>
+        She<br>
+        <span class="em">Cries</span>
+      </div>
+    </div>
+    <div class="meta">
+      <div class="lbl">
+        Alternative Techno<br>
+        Producer&nbsp;//&nbsp;DJ&nbsp;//&nbsp;Berlin · Lisbon
+      </div>
+      <div class="yr">MMXXVI</div>
+    </div>
+  </div>
+  <div class="scroll-cue">Scroll · I</div>
+</section>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker">
+  <div class="track">
+    <span>New Single — In Nature There's No Tragedy</span>
+    <span>Out Now</span>
+    <span>Saint Hours · The Tour 2026</span>
+    <span>Sónar / Berghain / Dekmantel / MIL</span>
+    <span>Mater (OST) on A24 — June 2026</span>
+    <span>New Single — In Nature There's No Tragedy</span>
+    <span>Out Now</span>
+    <span>Saint Hours · The Tour 2026</span>
+    <span>Sónar / Berghain / Dekmantel / MIL</span>
+    <span>Mater (OST) on A24 — June 2026</span>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="about frame-pad" id="about">
+  <div class="section-frame"></div>
+  <div class="section-runner">
+    <div class="mono">WSC</div>
+    <div class="mono">I&nbsp;&nbsp;//&nbsp;&nbsp;The Artist</div>
+  </div>
+  <div class="section-foot">
+    <div class="mono">WhySheCries</div>
+    <div class="rule"></div>
+    <div class="mono">MMXXVI</div>
+  </div>
+  <div class="inner">
+    <div class="grid">
+      <div class="imgcol reveal">
+        <img src="assets/cover-art.jpeg" alt="In Nature There's No Tragedy single artwork, 2025" width="800" height="840" decoding="async">
+      </div>
+      <div class="reveal">
+        <div class="eyebrow" style="margin-bottom: 22px;">The Artist</div>
+        <h2>Who<br>is <span class="em-italic">she.</span></h2>
+        <p class="lede">A producer working at the seam between sacred and synthetic — alternative techno scored for the hours when the body keeps moving but the mind has already left the room.</p>
+        <div class="meta">
+          <div>
+            <div class="k">Based</div>
+            <div class="v">Berlin · Lisbon</div>
+          </div>
+          <div>
+            <div class="k">Active</div>
+            <div class="v">2017 — Present</div>
+          </div>
+          <div>
+            <div class="k">Genre</div>
+            <div class="v">Alt-techno · Ritual</div>
+          </div>
+          <div>
+            <div class="k">Label</div>
+            <div class="v">Ostgut Ton</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SONIC IDENTITY ============ -->
+<section class="sonic frame-pad" id="sound">
+  <div class="section-frame"></div>
+  <div class="section-runner">
+    <div class="mono">WSC</div>
+    <div class="mono">II&nbsp;&nbsp;//&nbsp;&nbsp;The Sound</div>
+  </div>
+  <div class="section-foot">
+    <div class="mono">WhySheCries</div>
+    <div class="rule"></div>
+    <div class="mono">MMXXVI</div>
+  </div>
+  <div class="inner">
+    <div class="head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 22px;">Sonic Identity</div>
+        <h2>Three pillars<br>of <span class="em-italic">the work.</span></h2>
+      </div>
+      <p class="deck">Not genre — gesture. Three movements that recur across every release, every set, every live edit.</p>
+    </div>
+    <div class="grid3">
+      <div class="card reveal">
+        <div class="num">I.</div>
+        <h3>The Procession</h3>
+        <p>Down-tempo, 118–124&nbsp;BPM. Bass that walks rather than punches. Built for the long approach — the hour before the floor breaks.</p>
+        <div class="tags">DUB · SUB · BOWED LOW-END</div>
+      </div>
+      <div class="card reveal">
+        <div class="num">II.</div>
+        <h3>The Liturgy</h3>
+        <p>Sampled choir, field-recorded Mass, processed Latin. A vocal language that sounds remembered, never invented — even when it is.</p>
+        <div class="tags">CHOIR · TAPE · GLOSSOLALIA</div>
+      </div>
+      <div class="card reveal">
+        <div class="num">III.</div>
+        <h3>The Reckoning</h3>
+        <p>Distortion as catharsis. When the kick finally lands, it doesn't drop — it confesses. Closing track territory; rarely premiered before 4 am.</p>
+        <div class="tags">DISTORTION · 4×4 · CATHARSIS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LISTEN ============ -->
+<section class="listen frame-pad" id="listen">
+  <div class="section-frame"></div>
+  <div class="section-runner">
+    <div class="mono">WSC</div>
+    <div class="mono">III&nbsp;&nbsp;//&nbsp;&nbsp;Catalogue</div>
+  </div>
+  <div class="section-foot">
+    <div class="mono">WhySheCries</div>
+    <div class="rule"></div>
+    <div class="mono">MMXXVI</div>
+  </div>
+  <div class="inner">
+    <div class="head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 22px;">Listen</div>
+        <h2>The Catalogue.</h2>
+      </div>
+      <div class="tally">14 releases · 2019 — 2026</div>
+    </div>
+    <div class="releases">
+      <a class="rel reveal" href="#">
+        <div class="year">2026</div>
+        <div class="title">In Nature There's No Tragedy</div>
+        <div class="kind">Single</div>
+        <div class="label">Ostgut Ton</div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="6,4 20,12 6,20"/></svg></div>
+      </a>
+      <a class="rel reveal" href="#">
+        <div class="year">2025</div>
+        <div class="title">Mater (OST)</div>
+        <div class="kind">Score · A24</div>
+        <div class="label">Milan Records</div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="6,4 20,12 6,20"/></svg></div>
+      </a>
+      <a class="rel reveal" href="#">
+        <div class="year">2024</div>
+        <div class="title">Saint Hours</div>
+        <div class="kind">LP · Debut</div>
+        <div class="label">Ostgut Ton</div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="6,4 20,12 6,20"/></svg></div>
+      </a>
+      <a class="rel reveal" href="#">
+        <div class="year">2023</div>
+        <div class="title">Crow, Crowing</div>
+        <div class="kind">EP</div>
+        <div class="label">Ostgut Ton</div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="6,4 20,12 6,20"/></svg></div>
+      </a>
+      <a class="rel reveal" href="#">
+        <div class="year">2022</div>
+        <div class="title">A Slow Bell</div>
+        <div class="kind">EP</div>
+        <div class="label">Verdugo Tapes</div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="6,4 20,12 6,20"/></svg></div>
+      </a>
+      <a class="rel reveal" href="#">
+        <div class="year">2020</div>
+        <div class="title">Nine Vespers</div>
+        <div class="kind">Mixtape</div>
+        <div class="label">Self-released</div>
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><polygon points="6,4 20,12 6,20"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRESS ============ -->
+<section class="press frame-pad" id="press">
+  <div class="section-frame"></div>
+  <div class="section-runner">
+    <div class="mono">WSC</div>
+    <div class="mono">IV&nbsp;&nbsp;//&nbsp;&nbsp;Press</div>
+  </div>
+  <div class="section-foot">
+    <div class="mono">WhySheCries</div>
+    <div class="rule"></div>
+    <div class="mono">MMXXVI</div>
+  </div>
+  <div class="inner">
+    <div class="head reveal">
+      <div class="eyebrow" style="margin-bottom: 22px;">Critical Reception</div>
+      <h2>What they have <span class="em-italic">said.</span></h2>
+    </div>
+    <div class="quotes" style="margin-top: 70px;">
+      <div class="q reveal">
+        <span class="qmark">"</span>
+        <blockquote>The closest thing techno has produced to a requiem mass — heavy, patient, and not interested in your comfort.</blockquote>
+        <cite><b>The Wire</b> — November 2024</cite>
+      </div>
+      <div class="q reveal">
+        <span class="qmark">"</span>
+        <blockquote>A set that felt less like a performance than a long, dignified argument with God.</blockquote>
+        <cite><b>Resident Advisor</b> — Berghain Review, 2025</cite>
+      </div>
+      <div class="q reveal">
+        <span class="qmark">"</span>
+        <blockquote>Saint Hours is the rarest kind of debut: an album that arrives fully grown, already at peace with what it is.</blockquote>
+        <cite><b>Pitchfork</b> — 8.4 / Best New Music</cite>
+      </div>
+      <div class="q reveal">
+        <span class="qmark">"</span>
+        <blockquote>She is building a new vocabulary for the after-hours — slower, sadder, and unmistakably hers.</blockquote>
+        <cite><b>Crack Magazine</b> — Cover Feature, Spring '26</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE (full-bleed) ============ -->
+<section class="live">
+  <div class="lbl mono">V&nbsp;&nbsp;//&nbsp;&nbsp;Live</div>
+  <div class="content">
+    <h2>The set is a <span class="em-italic">service.</span></h2>
+    <p>Ninety minutes, one hardware rig, no risers. Lit from below in oxblood and gold. She plays seated. The crowd may dance, but she does not signal them.</p>
+  </div>
+</section>
+
+<!-- ============ TOUR ============ -->
+<section class="tour frame-pad" id="tour">
+  <div class="section-frame"></div>
+  <div class="section-runner">
+    <div class="mono">WSC</div>
+    <div class="mono">VI&nbsp;&nbsp;//&nbsp;&nbsp;Selected Dates</div>
+  </div>
+  <div class="section-foot">
+    <div class="mono">WhySheCries</div>
+    <div class="rule"></div>
+    <div class="mono">MMXXVI</div>
+  </div>
+  <div class="inner">
+    <div class="head reveal">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 22px;">Touring · Summer / Autumn 2026</div>
+        <h2>Selected Dates.</h2>
+      </div>
+      <div class="leg">14 confirmed · 6 sold out<br>routing through September</div>
+    </div>
+    <div class="list">
+      <div class="date-row reveal">
+        <div class="date">Jun 12</div>
+        <div class="city">Barcelona</div>
+        <div class="venue">Sónar — SonarClub stage</div>
+        <div class="status sold">Sold Out</div>
+        <a class="btn disabled" aria-disabled="true" tabindex="-1">Waitlist</a>
+      </div>
+      <div class="date-row reveal">
+        <div class="date">Jun 28</div>
+        <div class="city">Berlin</div>
+        <div class="venue">Berghain — Klubnacht</div>
+        <div class="status sold">Sold Out</div>
+        <a class="btn disabled" aria-disabled="true" tabindex="-1">Waitlist</a>
+      </div>
+      <div class="date-row reveal">
+        <div class="date">Jul 11</div>
+        <div class="city">Amsterdam</div>
+        <div class="venue">Dekmantel Festival</div>
+        <div class="status">On Sale</div>
+        <a class="btn" href="https://dekmantel.com/" rel="noopener" target="_blank" aria-label="Tickets for Amsterdam Dekmantel Festival, July 11">Tickets</a>
+      </div>
+      <div class="date-row reveal">
+        <div class="date">Jul 26</div>
+        <div class="city">Lisbon</div>
+        <div class="venue">Sé de Lisboa Crypt — MIL Festival</div>
+        <div class="status sold">Sold Out</div>
+        <a class="btn disabled" aria-disabled="true" tabindex="-1">Waitlist</a>
+      </div>
+      <div class="date-row reveal">
+        <div class="date">Aug 09</div>
+        <div class="city">Tokyo</div>
+        <div class="venue">Liquidroom</div>
+        <div class="status">On Sale</div>
+        <a class="btn" href="https://liquidroom.net/" rel="noopener" target="_blank" aria-label="Tickets for Tokyo Liquidroom, August 9">Tickets</a>
+      </div>
+      <div class="date-row reveal">
+        <div class="date">Aug 23</div>
+        <div class="city">Mexico City</div>
+        <div class="venue">MUTEK.MX — Catedral</div>
+        <div class="status">On Sale</div>
+        <a class="btn" href="https://mutek.mx/" rel="noopener" target="_blank" aria-label="Tickets for Mexico City MUTEK.MX, August 23">Tickets</a>
+      </div>
+      <div class="date-row reveal">
+        <div class="date">Sep 14</div>
+        <div class="city">New York</div>
+        <div class="venue">Knockdown Center — Bossa Nova takeover</div>
+        <div class="status">Announce TBA</div>
+        <a class="btn disabled" aria-disabled="true" tabindex="-1">Soon</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAGE & VISUALS ============ -->
+<section class="stage-vis" id="visuals">
+    <div class="imgcol">
+      <img src="assets/ref-masks.jpg" alt="Masked attendants flanking the stage in oxblood light" width="800" height="600" loading="lazy" decoding="async">
+    </div>
+  <div class="col">
+    <div class="eyebrow">VII&nbsp;&nbsp;//&nbsp;&nbsp;Stage & Visuals</div>
+    <h2>Theatre,<br>not lightshow.</h2>
+    <p class="lede">No LED walls. No timecode. The room is the visual — masked attendants at the wings, oxblood gel washes, a single tungsten spot on the rig. Smoke is mandatory.</p>
+    <ul>
+      <li>
+        <div class="k">Lighting</div>
+        <div class="v">Oxblood + amber wash, low-side; one tungsten key. No strobes.</div>
+      </li>
+      <li>
+        <div class="k">Stage</div>
+        <div class="v">Floor-level riser only. No platform. Performer seated.</div>
+      </li>
+      <li>
+        <div class="k">Attendants</div>
+        <div class="v">Two masked figures (provided) flank the rig. Static.</div>
+      </li>
+      <li>
+        <div class="k">Drapery</div>
+        <div class="v">Crimson curtain backdrop. Promoter supplies 6m × 4m min.</div>
+      </li>
+      <li>
+        <div class="k">Haze</div>
+        <div class="v">Heavy. Continuous. Required, not preferred.</div>
+      </li>
+      <li>
+        <div class="k">Audio</div>
+        <div class="v">Funktion-One or equivalent. Sub array non-negotiable.</div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ MANTRA ============ -->
+<section class="mantra">
+  <div class="center">
+    <div class="roman">VIII.</div>
+    <blockquote>"In nature<br><span class="em-italic">there's no</span><br>tragedy."</blockquote>
+    <cite>— WhySheCries, in conversation with The Wire, 2024</cite>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="left">
+    <div>
+      <div class="eyebrow" style="margin-bottom: 22px;">IX&nbsp;&nbsp;//&nbsp;&nbsp;Booking & Press</div>
+      <h2>Reach<br><span class="em-italic">out.</span></h2>
+      <div class="grid">
+        <div class="ent">
+          <div class="k">Worldwide Booking</div>
+          <div class="v"><b>Wasserman Music</b><br>Lena Kowalski<br><a href="mailto:lena@wassermanmusic.com">lena@wassermanmusic.com</a></div>
+        </div>
+        <div class="ent">
+          <div class="k">North America</div>
+          <div class="v"><b>Paradigm NYC</b><br>Marcus Vega<br><a href="mailto:mvega@paradigmagency.com">mvega@paradigmagency.com</a></div>
+        </div>
+        <div class="ent">
+          <div class="k">Press & PR</div>
+          <div class="v"><b>Mute Press</b><br>Iris Nair<br><a href="mailto:iris@mute.press">iris@mute.press</a></div>
+        </div>
+        <div class="ent">
+          <div class="k">Management</div>
+          <div class="v"><b>House of Verdugo</b><br>Hugo Salazar<br><a href="mailto:hugo@verdugo.house">hugo@verdugo.house</a></div>
+        </div>
+        <div class="ent">
+          <div class="k">Sync · Film</div>
+          <div class="v"><b>Northern Lights Sync</b><br><a href="mailto:sync@northernlights.com">sync@northernlights.com</a></div>
+        </div>
+        <div class="ent">
+          <div class="k">Direct</div>
+          <div class="v"><b>whyshecries.com</b><br>@whyshecries · all platforms</div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="right">
+      <div class="logo"><img src="assets/logo.png" alt="WhySheCries" width="440" height="383"></div>
+    </div>
+   </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="row">
+    <a href="#top" class="brand" aria-label="WhySheCries — back to top">
+      <img src="assets/logo.png" alt="" role="presentation" width="38" height="38">
+      <span>WhySheCries</span>
+    </a>
+    <div class="socials" aria-label="Music and social platforms">
+      <a href="https://open.spotify.com/" rel="noopener" target="_blank">Spotify</a>
+      <a href="https://music.apple.com/" rel="noopener" target="_blank">Apple</a>
+      <a href="https://soundcloud.com/" rel="noopener" target="_blank">SoundCloud</a>
+      <a href="https://bandcamp.com/" rel="noopener" target="_blank">Bandcamp</a>
+      <a href="https://instagram.com/" rel="noopener" target="_blank">Instagram</a>
+      <a href="https://youtube.com/" rel="noopener" target="_blank">YouTube</a>
+    </div>
+  </div>
+  <div class="copy">
+    <div>© WhySheCries · MMXXVI · All rights reserved</div>
+    <div>In nature there's no tragedy</div>
+    <div>Site v.01 — Berlin · Lisbon</div>
+  </div>
+</footer>
+
+<script>
+  // respect reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // sticky nav background (throttled with rAF)
+  const nav = document.getElementById('topnav');
+  let scrollTicking = false;
+  const onScroll = () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+    scrollTicking = false;
+  };
+  const onScrollRaf = () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(onScroll);
+      scrollTicking = true;
+    }
+  };
+  window.addEventListener('scroll', onScrollRaf, {passive:true});
+  onScroll();
+
+  // reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -80px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  }
+
+  // smooth scroll for nav anchors
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      const id = a.getAttribute('href');
+      if (id.length > 1) {
+        const t = document.querySelector(id);
+        if (t) {
+          ev.preventDefault();
+          const top = t.getBoundingClientRect().top + window.scrollY - 20;
+          window.scrollTo({top, behavior: prefersReducedMotion ? 'auto' : 'smooth'});
+          // close mobile menu on link tap
+          closeMobileMenu();
+        }
+      }
+    });
+  });
+
+  // mobile menu toggle
+  const navEl = document.getElementById('topnav');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const burger = navEl && navEl.querySelector('.burger');
+  const openMobileMenu = () => {
+    navEl.setAttribute('data-open', '');
+    mobileMenu.setAttribute('data-open', 'true');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Close menu');
+    document.body.classList.add('no-scroll');
+  };
+  const closeMobileMenu = () => {
+    navEl.removeAttribute('data-open');
+    mobileMenu.setAttribute('data-open', 'false');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('no-scroll');
+  };
+  burger && burger.addEventListener('click', () => {
+    if (navEl.hasAttribute('data-open')) closeMobileMenu();
+    else openMobileMenu();
+  });
+  // close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navEl.hasAttribute('data-open')) closeMobileMenu();
+  });
+  // close on resize to desktop
+  let resizeT;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeT);
+    resizeT = setTimeout(() => {
+      if (window.innerWidth > 900 && navEl.hasAttribute('data-open')) closeMobileMenu();
+    }, 150);
+  }, {passive:true});
+</script>
+
+<!-- ============ LOADING SCREEN ============ -->
+<div id="loader" aria-hidden="true">
+  <div class="logo-pulse">
+    <img src="assets/logo.png" alt="">
+  </div>
+  <div class="loader-bar"></div>
+</div>
+
+<!-- ============ SCROLL PROGRESS ============ -->
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<!-- ============ AUDIO PLAYER ============ -->
+<aside id="player" aria-label="Audio player" role="region">
+  <div class="player-head">
+    <button class="player-btn" type="button" aria-label="Play">
+      <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><polygon points="6,4 20,12 6,20"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+    <div class="player-meta">
+      <div class="player-title">—</div>
+      <div class="player-artist">WhySheCries</div>
+    </div>
+    <button class="player-close" type="button" aria-label="Close player">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+    </button>
+  </div>
+  <div class="player-waveform" aria-hidden="true">
+    <div class="player-loader">Loading waveform…</div>
+  </div>
+  <div class="player-time">
+    <span class="player-current">0:00</span>
+    <span class="player-duration">0:00</span>
+  </div>
+  <div class="player-volume">
+    <button class="player-volume-icon" type="button" aria-label="Mute">
+      <svg class="icon-vol-up" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.06A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06A9 9 0 0 0 14 3.23z"/></svg>
+      <svg class="icon-vol-mute" viewBox="0 0 24 24" aria-hidden="true" style="display:none"><path d="M16.5 12A4.5 4.5 0 0 0 14 7.97v2.21l2.45 2.45c.03-.21.05-.42.05-.63zM19 12c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.96 8.96 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06a8.99 8.99 0 0 0 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4 9.91 6.09 12 8.18V4z"/></svg>
+    </button>
+    <input type="range" min="0" max="100" value="80" aria-label="Volume">
+  </div>
+</aside>
+
+<!-- ============ MODULAR JS (v3) ============ -->
+<!-- Tracks data (small enough to inline) -->
+<script id="tracks-data" type="application/json">
+{
+  "tracks": [
+    { "id": "01-in-nature",     "title": "In Nature There's No Tragedy", "year": 2026, "url": "assets/tracks/01-in-nature.wav" },
+    { "id": "02-saint-hours",   "title": "Saint Hours",                 "year": 2024, "url": "assets/tracks/02-saint-hours.wav" },
+    { "id": "03-mater-ost",     "title": "Mater (OST)",                 "year": 2025, "url": "assets/tracks/03-mater-ost.wav" },
+    { "id": "04-crow-crowing",  "title": "Crow, Crowing",               "year": 2023, "url": "assets/tracks/04-crow-crowing.wav" },
+    { "id": "05-slow-bell",     "title": "A Slow Bell",                 "year": 2022, "url": "assets/tracks/05-slow-bell.wav" },
+    { "id": "06-nine-vespers",  "title": "Nine Vespers",                "year": 2020, "url": "assets/tracks/06-nine-vespers.wav" }
+  ]
+}
+</script>
+
+<!-- App scripts (loaded in order) -->
+<script src="js/loader.js" defer></script>
+<script src="js/player.js" defer></script>
+<script src="js/animations.js" defer></script>
+<script src="js/main.js" defer></script>
+
+</body>
+</html>

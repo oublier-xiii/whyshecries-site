@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Vercel
+.vercel/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Temp files / staging
+*~
+*.tmp
+*.bak
+
+# OS-generated
+.DS_Store
+
+# Vercel-generated
+.vercel
+
+# Don't ignore the actual project files
+!index.html
+!assets/
+!js/

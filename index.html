@@ -939,6 +939,73 @@ nav.top[data-open] .burger .close{ display: block; }
     invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%)
     drop-shadow(0 0 60px rgba(196,30,34,.4));
 }
+
+/* ============ VINYL: contact logo spins when audio is playing ============ */
+.contact .right .logo.vinyl{
+  width: min(380px, 75%);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%,
+      var(--ember) 0%,
+      var(--ember) 22%,
+      #0b0606 22%,
+      #0b0606 26%,
+      #1a0a0a 26%,
+      #1a0a0a 28%,
+      #0b0606 28%,
+      #0b0606 100%);
+  box-shadow:
+    0 0 60px rgba(196,30,34,.25),
+    inset 0 0 40px rgba(0,0,0,.6);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  will-change: transform;
+}
+.contact .right .logo.vinyl::before{
+  /* Concentric grooves for the vinyl feel */
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background: repeating-radial-gradient(
+    circle at 50% 50%,
+    transparent 0px, transparent 4px,
+    rgba(255,255,255,.025) 4px, rgba(255,255,255,.025) 5px
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+.contact .right .logo.vinyl::after{
+  /* Spindle hole in the center */
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 14px; height: 14px;
+  background: #0b0606;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 0 3px rgba(0,0,0,.8);
+  z-index: 2;
+}
+.contact .right .logo.vinyl .vinyl-label{
+  width: 60%; height: 60%;
+  object-fit: contain;
+  filter: none;
+  position: relative;
+  z-index: 1;
+  transform: translateZ(0);
+}
+/* When audio is playing globally, spin the vinyl */
+body.is-playing .contact .right .logo.vinyl{
+  animation: vinylSpin 4s linear infinite;
+}
+body.is-playing .contact .right .logo.vinyl .vinyl-label{
+  animation: vinylSpin 4s linear infinite;
+  transform-origin: center center;
+}
+@keyframes vinylSpin{
+  to{ transform: rotate(360deg); }
+}
 .contact h2{
   font-size: clamp(56px, 8vw, 130px);
   margin-bottom: 50px;
@@ -1646,8 +1713,94 @@ section{
   to{ transform: translateY(0) scale(1); opacity: 1; }
 }
 
-/* ============ Cursor subtle (re-enabled with no-op) ============ */
-/* Custom cursor removed but leaving this stub in case we re-enable. */
+  /* ============ Custom cursor (solid ember, no blend issues) ============ */
+  #cursor{
+    position: fixed; top: 0; left: 0;
+    pointer-events: none;
+    z-index: 99999;
+    mix-blend-mode: difference; /* keeps it visible on any background */
+    opacity: 0;
+    transition: opacity .2s ease;
+    will-change: transform;
+  }
+  #cursor.is-ready{ opacity: 1; }
+  #cursor .cursor-outer,
+  #cursor .cursor-inner{
+    position: fixed; top: 0; left: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform;
+  }
+  #cursor .cursor-outer{
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(236,224,203,.95);
+    margin: -18px 0 0 -18px;
+    transition:
+      width .25s cubic-bezier(.2,.8,.2,1),
+      height .25s cubic-bezier(.2,.8,.2,1),
+      margin .25s cubic-bezier(.2,.8,.2,1),
+      border-color .25s ease,
+      background .25s ease;
+  }
+  #cursor .cursor-inner{
+    width: 6px; height: 6px;
+    background: var(--ember);
+    margin: -3px 0 0 -3px;
+    box-shadow: 0 0 8px rgba(196,30,34,.8);
+    transition:
+      width .25s cubic-bezier(.2,.8,.2,1),
+      height .25s cubic-bezier(.2,.8,.2,1),
+      margin .25s cubic-bezier(.2,.8,.2,1),
+      opacity .25s ease,
+      background .25s ease;
+  }
+  #cursor.is-hover .cursor-outer{
+    width: 60px; height: 60px;
+    margin: -30px 0 0 -30px;
+    border-color: rgba(196,30,34,.95);
+    background: rgba(196,30,34,.12);
+  }
+  #cursor.is-hover .cursor-inner{ opacity: 0; }
+  #cursor.is-button .cursor-outer{
+    width: 50px; height: 50px;
+    margin: -25px 0 0 -25px;
+    border-radius: 6px;
+    border-color: rgba(236,224,203,.95);
+    background: rgba(196,30,34,.15);
+  }
+  #cursor.is-button .cursor-inner{
+    width: 0; height: 0;
+    opacity: 0;
+  }
+  #cursor.is-text .cursor-outer{
+    width: 3px; height: 32px;
+    margin: -16px 0 0 -1.5px;
+    border-radius: 1px;
+    background: rgba(236,224,203,.95);
+    border-color: transparent;
+  }
+  #cursor.is-text .cursor-inner{ opacity: 0; }
+  #cursor.is-click .cursor-outer{
+    width: 24px; height: 24px;
+    margin: -12px 0 0 -12px;
+    background: rgba(196,30,34,.7);
+    border-color: transparent;
+  }
+  #cursor.is-click .cursor-inner{
+    width: 8px; height: 8px;
+    background: var(--bone);
+  }
+  @media (hover: none), (pointer: coarse){
+    #cursor{ display: none; }
+    body.has-custom-cursor{ cursor: auto !important; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #cursor{ display: none; }
+    body.has-custom-cursor{ cursor: auto !important; }
+  }
+  /* Hide system cursor when custom is active */
+  body.has-custom-cursor,
+  body.has-custom-cursor *{ cursor: none !important; }
 
 /* ============ Smooth focus rings (a11y) ============ */
 a:focus-visible, button:focus-visible{
@@ -2106,7 +2259,10 @@ a:focus-visible, button:focus-visible{
     </div>
   </div>
     <div class="right">
-      <div class="logo"><img src="assets/logo.png" alt="WhySheCries" width="440" height="383"></div>
+      <div class="logo vinyl" id="contact-vinyl">
+        <div class="vinyl-grooves" aria-hidden="true"></div>
+        <img src="assets/logo.png" alt="WhySheCries" width="440" height="383" class="vinyl-label">
+      </div>
     </div>
    </section>
 
@@ -2234,7 +2390,13 @@ a:focus-visible, button:focus-visible{
 </div>
 
 <!-- ============ SCROLL PROGRESS ============ -->
-<div class="scroll-progress" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ============ CUSTOM CURSOR ============ -->
+  <div id="cursor" class="cursor" aria-hidden="true">
+    <div class="cursor-outer"></div>
+    <div class="cursor-inner"></div>
+  </div>
 
 <!-- ============ AUDIO PLAYER ============ -->
 <aside id="player" aria-label="Audio player" role="region">

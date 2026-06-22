@@ -108,7 +108,10 @@
       setLoading(true);
       ws.load(track.url).then(() => {
         setLoading(false);
-        if (autoplay) ws.play();
+        if (autoplay) {
+          ws.play();
+          document.body.classList.add('is-playing');
+        }
       }).catch((err) => {
         console.error('Failed to load track:', track.url, err);
         setLoading(false);
@@ -117,10 +120,19 @@
       updateReleaseState();
     };
 
-    ws.on('play', () => { setPlayingUI(true); updateReleaseState(); });
-    ws.on('pause', () => { setPlayingUI(false); updateReleaseState(); });
+    ws.on('play', () => {
+      setPlayingUI(true);
+      updateReleaseState();
+      document.body.classList.add('is-playing');
+    });
+    ws.on('pause', () => {
+      setPlayingUI(false);
+      updateReleaseState();
+      document.body.classList.remove('is-playing');
+    });
     ws.on('finish', () => {
       setPlayingUI(false);
+      document.body.classList.remove('is-playing');
       const next = (currentIndex + 1) % tracks.length;
       loadTrack(next, true);
     });

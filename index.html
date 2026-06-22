@@ -142,43 +142,47 @@ h1, h2, h3{
   color: var(--ember);
 }
 
-/* ============ shared section frame ============ */
-section{ position: relative; }
-.frame-pad{ padding: clamp(80px, 10vw, 160px) var(--pad-x); position: relative; }
-.section-frame{
-  position: absolute;
-  inset: clamp(28px, 3vw, 56px);
-  border: 1px solid rgba(236,224,203,.16);
-  pointer-events: none;
-  z-index: 1;
-}
-.section-runner{
-  position: absolute;
-  top: clamp(40px, 4.4vw, 80px);
-  left: clamp(60px, 6.5vw, 130px);
-  right: clamp(60px, 6.5vw, 130px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 2;
-  color: rgba(236,224,203,.5);
-}
-.section-foot{
-  position: absolute;
-  bottom: clamp(36px, 3.6vw, 64px);
-  left: clamp(60px, 6.5vw, 130px);
-  right: clamp(60px, 6.5vw, 130px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 2;
-  color: rgba(236,224,203,.45);
-}
-.section-foot .rule{
-  flex: 1; height: 1px; background: rgba(236,224,203,.18);
-  margin: 0 28px;
-}
-.inner{ position: relative; z-index: 3; }
+  /* ============ shared section frame ============ */
+  section{ position: relative; }
+  /* frame-pad controls the inner content padding. Inset 20px horizontal
+     in mobile so content has breathing room from the screen edges. */
+  .frame-pad{ padding: clamp(64px, 10vw, 160px) var(--pad-x); position: relative; }
+  .section-frame{
+    position: absolute;
+    inset: clamp(20px, 3vw, 56px);
+    border: 1px solid rgba(236,224,203,.16);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .section-runner{
+    position: absolute;
+    top: clamp(32px, 4.4vw, 80px);
+    left: clamp(32px, 6.5vw, 130px);
+    right: clamp(32px, 6.5vw, 130px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    color: rgba(236,224,203,.5);
+    gap: 12px;
+  }
+  .section-foot{
+    position: absolute;
+    bottom: clamp(28px, 3.6vw, 64px);
+    left: clamp(32px, 6.5vw, 130px);
+    right: clamp(32px, 6.5vw, 130px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    color: rgba(236,224,203,.45);
+    gap: 12px;
+  }
+  .section-foot .rule{
+    flex: 1; min-width: 20px; height: 1px; background: rgba(236,224,203,.18);
+    margin: 0 12px;
+  }
+  .inner{ position: relative; z-index: 3; }
 
 /* ============ NAV ============ */
 nav.top{
@@ -409,8 +413,13 @@ nav.top[data-open] .burger .close{ display: block; }
   .hero .right{ padding: 32px 24px 80px; }
   .hero .tag-top{ margin-bottom: 32px; }
   .hero .meta{ flex-direction: column; align-items: flex-start; gap: 24px; margin-top: 40px; }
-  .hero .scroll-cue{ left: 24px; bottom: 24px; }
-  .section-runner, .section-foot{ left: 28px; right: 28px; }
+    .hero .scroll-cue{ left: 24px; bottom: 24px; }
+    .section-runner, .section-foot{ left: 28px; right: 28px; }
+    .frame-pad{ padding: 72px 22px 80px; }
+    .section-frame{ inset: 14px; }
+    .section-runner{ top: 26px; }
+    .section-foot{ bottom: 22px; }
+    .section-foot .rule{ margin: 0 8px; }
 }
 
 /* ============ TICKER ============ */
@@ -424,16 +433,16 @@ nav.top[data-open] .burger .close{ display: block; }
   z-index: 4;
 }
 .ticker .track{
-  display: flex; gap: 60px;
-  font-family:"Cinzel", serif;
+    display: flex; gap: 60px;
+    will-change: transform;
+    font-family:"Cinzel", serif;
   font-size: clamp(20px, 2.4vw, 36px);
   letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--bone);
-  white-space: nowrap;
-  animation: marquee 38s linear infinite;
-  width: max-content;
-}
+    text-transform: uppercase;
+    color: var(--bone);
+    white-space: nowrap;
+    width: max-content;
+  }
 .ticker .track span:nth-child(even){ color: var(--ember); font-style: italic; font-family:"EB Garamond"; font-weight: 500;}
 .ticker .track span::after{
   content: " ✶ ";
@@ -441,10 +450,7 @@ nav.top[data-open] .burger .close{ display: block; }
   margin-left: 60px;
   font-family:"EB Garamond";
 }
-@keyframes marquee{
-  from{ transform: translateX(0); }
-  to{ transform: translateX(-50%); }
-}
+/* marquee keyframe removed — ticker animation is JS-driven now (see js/ticker.js) */
 
 /* ============ ABOUT ============ */
 .about{ background: #0a0504; }
@@ -1135,8 +1141,11 @@ footer .copy{
 }
 
 /* ============ responsive: prevent horizontal scroll globally ============ */
-img, svg, video, canvas, iframe, embed, object{ max-width: 100%; }
-pre, code, table{ overflow-wrap: break-word; word-break: break-word; }
+  img, svg, video, canvas, iframe, embed, object{ max-width: 100%; }
+  pre, code, table{ overflow-wrap: break-word; word-break: break-word; }
+  h1, h2, h3, h4, h5, h6, p, blockquote, li{ overflow-wrap: break-word; }
+  /* Hero marquee words must stay together (no mid-word break) */
+  .hero .marquee .word{ white-space: nowrap; }
 
 /* ============ responsive: landscape mobile (short height) ============ */
 @media (max-height: 500px) and (orientation: landscape){
@@ -1501,10 +1510,9 @@ body.loading{ overflow: hidden; }
   text-shadow: 0 0 40px rgba(196,30,34,.3);
 }
 
-/* ============ Ticker hover speed-up ============ */
-.ticker .track{
-  transition: animation-duration .4s ease;
-}
+  /* ============ Ticker hover speed-up (JS-controlled, no reset) ============ */
+  /* Animation is now driven by JS (js/ticker.js) to avoid the reset glitch
+     that happens when animation-duration changes mid-flight. */
 .ticker .track:hover{
   animation-duration: 19s !important;
 }
@@ -2444,9 +2452,10 @@ a:focus-visible, button:focus-visible{
 }
 </script>
 
-<!-- App scripts (loaded in order) -->
-<script src="js/loader.js" defer></script>
-<script src="js/player.js" defer></script>
+  <!-- App scripts (loaded in order) -->
+  <script src="js/loader.js" defer></script>
+  <script src="js/ticker.js" defer></script>
+  <script src="js/player.js" defer></script>
 <script src="js/animations.js" defer></script>
 <script src="js/main.js" defer></script>
 

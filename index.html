@@ -960,6 +960,15 @@ nav.top[data-open] .burger .close{ display: block; }
     drop-shadow(0 0 60px rgba(196,30,34,.4));
 }
 
+/* When the logo is a vinyl record, completely override the base filter.
+   The original logo PNG has a dark W on transparent. The base filter
+   (invert(95%) ...) makes it look bone/light for the dark site bg.
+   For the vinyl, we want the logo dark on a cream label, so we
+   RESET the filter (no invert) and slightly enhance contrast. */
+.contact .right .logo.vinyl img{
+  filter: brightness(0) contrast(1.5);
+}
+
 /* ============ VINYL: contact logo spins when audio is playing ============ */
 .contact .right .logo.vinyl{
   width: min(380px, 75%);
@@ -1012,8 +1021,8 @@ nav.top[data-open] .burger .close{ display: block; }
 .contact .right .logo.vinyl .vinyl-label{
   width: 50%; height: 50%;
   object-fit: contain;
-  /* Invert the logo so it appears dark on the cream label */
-  filter: invert(1) sepia(0.2) saturate(2) hue-rotate(355deg);
+  /* No filter: let the parent .logo.vinyl img filter (brightness(0))
+     do the work. This keeps the logo dark on the cream label. */
   position: relative;
   z-index: 1;
   transform: translateZ(0);

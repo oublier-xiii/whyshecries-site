@@ -422,7 +422,7 @@ nav.top[data-open] .burger .close{ display: block; }
     .section-foot .rule{ margin: 0 8px; }
 }
 
-/* ============ TICKER ============ */
+/* ============ TICKER (CSS animation, no JS) ============ */
 .ticker{
   position: relative;
   background: #050202;
@@ -442,7 +442,13 @@ nav.top[data-open] .burger .close{ display: block; }
     color: var(--bone);
     white-space: nowrap;
     width: max-content;
+    /* Pure CSS animation. Track content is duplicated in HTML so a
+       -50% translateX creates a seamless loop. */
+    animation: tickerMarquee 38s linear infinite;
   }
+/* Hover speed-up via a separate keyframe (changing animation-name does
+   NOT reset the position the way changing animation-duration does). */
+.ticker .track:hover{ animation: tickerMarqueeFast 19s linear infinite; }
 .ticker .track span:nth-child(even){ color: var(--ember); font-style: italic; font-family:"EB Garamond"; font-weight: 500;}
 .ticker .track span::after{
   content: " ✶ ";
@@ -450,7 +456,14 @@ nav.top[data-open] .burger .close{ display: block; }
   margin-left: 60px;
   font-family:"EB Garamond";
 }
-/* marquee keyframe removed — ticker animation is JS-driven now (see js/ticker.js) */
+@keyframes tickerMarquee{
+  from{ transform: translate3d(0, 0, 0); }
+  to{ transform: translate3d(-50%, 0, 0); }
+}
+@keyframes tickerMarqueeFast{
+  from{ transform: translate3d(0, 0, 0); }
+  to{ transform: translate3d(-50%, 0, 0); }
+}
 
 /* ============ ABOUT ============ */
 .about{ background: #0a0504; }
@@ -623,6 +636,7 @@ nav.top[data-open] .burger .close{ display: block; }
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   color: var(--bone);
+  position: relative; /* so .play::after can position relative to this */
   transition: all .2s;
 }
 .rel .play svg{ width: 14px; height: 14px; fill: currentColor; margin-left: 2px; }
@@ -953,33 +967,35 @@ nav.top[data-open] .burger .close{ display: block; }
   border-radius: 50%;
   background:
     radial-gradient(circle at 50% 50%,
-      var(--ember) 0%,
-      var(--ember) 22%,
-      #0b0606 22%,
-      #0b0606 26%,
-      #1a0a0a 26%,
-      #1a0a0a 28%,
-      #0b0606 28%,
+      #f5e6c8 0%,
+      #f5e6c8 30%,
+      #0b0606 30%,
+      #0b0606 32%,
+      #1a0a0a 32%,
+      #1a0a0a 34%,
+      #0b0606 34%,
       #0b0606 100%);
   box-shadow:
-    0 0 60px rgba(196,30,34,.25),
+    0 0 60px rgba(196,30,34,.2),
     inset 0 0 40px rgba(0,0,0,.6);
   display: flex; align-items: center; justify-content: center;
   position: relative;
   will-change: transform;
 }
 .contact .right .logo.vinyl::before{
-  /* Concentric grooves for the vinyl feel */
+  /* Concentric grooves for the vinyl feel — masked to only the black area */
   content: "";
   position: absolute; inset: 0;
   border-radius: 50%;
   background: repeating-radial-gradient(
     circle at 50% 50%,
     transparent 0px, transparent 4px,
-    rgba(255,255,255,.025) 4px, rgba(255,255,255,.025) 5px
+    rgba(255,255,255,.03) 4px, rgba(255,255,255,.03) 5px
   );
   pointer-events: none;
   mix-blend-mode: overlay;
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, transparent 0%, transparent 30%, black 30%, black 100%);
+          mask-image: radial-gradient(circle at 50% 50%, transparent 0%, transparent 30%, black 30%, black 100%);
 }
 .contact .right .logo.vinyl::after{
   /* Spindle hole in the center */
@@ -994,9 +1010,10 @@ nav.top[data-open] .burger .close{ display: block; }
   z-index: 2;
 }
 .contact .right .logo.vinyl .vinyl-label{
-  width: 60%; height: 60%;
+  width: 50%; height: 50%;
   object-fit: contain;
-  filter: none;
+  /* Invert the logo so it appears dark on the cream label */
+  filter: invert(1) sepia(0.2) saturate(2) hue-rotate(355deg);
   position: relative;
   z-index: 1;
   transform: translateZ(0);
@@ -1362,9 +1379,12 @@ body.loading{ overflow: hidden; }
 .rel.is-current .play::after{
   content: "";
   position: absolute;
-  inset: -4px;
+  top: 50%; left: 50%;
+  width: 52px; height: 52px;
+  margin: -26px 0 0 -26px; /* center on the play button (52px - 1px border = 52, half = 26) */
   border: 1px solid var(--ember);
   border-radius: 50%;
+  pointer-events: none;
   animation: playRing 1.6s ease-in-out infinite;
 }
 @keyframes playRing{
@@ -2454,7 +2474,6 @@ a:focus-visible, button:focus-visible{
 
   <!-- App scripts (loaded in order) -->
   <script src="js/loader.js" defer></script>
-  <script src="js/ticker.js" defer></script>
   <script src="js/player.js" defer></script>
 <script src="js/animations.js" defer></script>
 <script src="js/main.js" defer></script>

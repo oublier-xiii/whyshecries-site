@@ -348,6 +348,16 @@ nav.top[data-open] .burger .close{ display: block; }
     invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%)
     drop-shadow(0 0 60px rgba(196,30,34,.4));
 }
+/* Both faces share the SAME filter so there's no color change
+   as the parent rotates past 180 degrees. The back face is just
+   the front face rotated 180deg on Y — same content, same color. */
+.hero .logo-3d .logo-front{
+  transform: translateZ(1px);
+}
+.hero .logo-3d .logo-back{
+  transform: rotateY(180deg) translateZ(1px);
+  /* No filter override — inherits identical styling from .logo-face */
+}
 @keyframes logoSpin3d{
   from{ transform: rotateY(0deg); }
   to{ transform: rotateY(360deg); }
@@ -1919,7 +1929,8 @@ a:focus-visible, button:focus-visible{
   <div class="left">
     <div class="logo-wrap">
       <div class="logo-3d">
-        <img class="logo-face" src="assets/logo.svg" alt="WhySheCries logo, stylized W with red accents" width="540" height="470" decoding="async">
+        <img class="logo-face logo-front" src="assets/logo.svg" alt="WhySheCries logo, stylized W with red accents" width="540" height="470" decoding="async">
+        <img class="logo-face logo-back" src="assets/logo.svg" alt="" role="presentation" width="540" height="470" aria-hidden="true">
       </div>
     </div>
   </div>

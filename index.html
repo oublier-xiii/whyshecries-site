@@ -22,7 +22,7 @@
 <meta name="twitter:image" content="https://whyshecries-site.vercel.app/assets/cover-art.jpeg">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230b0606'/%3E%3Ctext x='50' y='66' font-family='Cinzel,serif' font-size='52' font-weight='600' fill='%23c41e22' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
-<link rel="preload" as="image" href="assets/logo.png">
+<link rel="preload" as="image" href="assets/logo.svg">
 <link rel="canonical" href="https://whyshecries-site.vercel.app/">
 
 <script type="application/ld+json">
@@ -327,6 +327,40 @@ nav.top[data-open] .burger .close{ display: block; }
   aspect-ratio: 1.15 / 1;
   display: flex; align-items: center; justify-content: center;
   position: relative;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+}
+.hero .logo-3d{
+  width: 100%; height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: logoSpin3d 12s linear infinite;
+  will-change: transform;
+}
+.hero .logo-3d .logo-face{
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  filter:
+    invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(98%)
+    drop-shadow(0 0 60px rgba(196,30,34,.4));
+}
+.hero .logo-3d .logo-front{
+  transform: translateZ(1px);
+}
+.hero .logo-3d .logo-back{
+  transform: rotateY(180deg) translateZ(1px);
+  opacity: 0.5;
+  filter:
+    invert(95%) sepia(8%) saturate(300%) hue-rotate(355deg) brightness(60%)
+    drop-shadow(0 0 40px rgba(196,30,34,.2));
+}
+@keyframes logoSpin3d{
+  from{ transform: rotateY(0deg); }
+  to{ transform: rotateY(360deg); }
 }
 .hero .logo-wrap img{
   width: 100%; height: 100%; object-fit: contain;
@@ -1495,9 +1529,9 @@ body.loading{ overflow: hidden; }
   transform: translateY(-2px);
 }
 
-/* Reduced motion: kill TRANSITIONS but keep decorative loop animations
-   (ticker, marquee, pulse, glow) running. These are non-essential visual
-   loops that don't affect accessibility. */
+  /* Reduced motion: kill TRANSITIONS but keep decorative loop animations
+     (ticker, marquee, pulse, glow, logo-3d-spin) running. These are non-essential visual
+     loops that don't affect accessibility. */
 @media (prefers-reduced-motion: reduce){
   *, *::before, *::after{
     transition-duration: .001ms !important;
@@ -1525,10 +1559,8 @@ body.loading{ overflow: hidden; }
   to{ transform: translateY(0); opacity: 1; }
 }
 
-/* ============ hero logo continuous pulse ============ */
-.hero .logo-wrap img{
-  animation: pulse 4s ease-in-out infinite;
-}
+/* ============ hero logo continuous pulse (DISABLED — logo now 3D-rotates) ============ */
+/* .hero .logo-wrap img{ animation: pulse 4s ease-in-out infinite; } */
 
 /* ============ MarQUEE text subtle hover effect ============ */
 .hero .marquee{
@@ -1896,7 +1928,10 @@ a:focus-visible, button:focus-visible{
 <section class="hero" id="top">
   <div class="left">
     <div class="logo-wrap">
-      <img src="assets/logo.png" alt="WhySheCries logo, stylized W with red accents" width="540" height="470" decoding="async">
+      <div class="logo-3d">
+        <img class="logo-face logo-front" src="assets/logo.svg" alt="WhySheCries logo, stylized W with red accents" width="540" height="470" decoding="async">
+        <img class="logo-face logo-back" src="assets/logo.svg" alt="" role="presentation" width="540" height="470" aria-hidden="true">
+      </div>
     </div>
   </div>
   <div class="right">

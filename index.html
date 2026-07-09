@@ -355,8 +355,11 @@ nav.top[data-open] .burger .close{ display: block; }
   transform: translateZ(1px);
 }
 .hero .logo-3d .logo-back{
-  transform: rotateY(180deg) translateZ(1px);
-  /* No filter override — inherits identical styling from .logo-face */
+  /* scaleX(-1) undoes the mirroring caused by rotateY(180deg),
+     so the back face shows the logo non-mirrored when it comes
+     into view. This creates the illusion of a solid 3D object
+     rather than a flat card flipping. */
+  transform: rotateY(180deg) scaleX(-1) translateZ(1px);
 }
 @keyframes logoSpin3d{
   from{ transform: rotateY(0deg); }

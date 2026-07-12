@@ -73,7 +73,7 @@
     let currentIndex = -1;
     let isMuted = false;
     let prevVolume = 0.8;
-    let loadGeneration = 0;
+    let pendingTrack = null;
 
     const fmt = (sec) => {
       if (!isFinite(sec)) return '0:00';
@@ -103,25 +103,19 @@
     const loadTrack = (index, autoplay = true) => {
       if (index < 0 || index >= tracks.length) return;
       const track = tracks[index];
-      const generation = ++loadGeneration;
+      
+      // Detener reproducción anterior inmediatamente
+      ws.stop();
+      
+      // Guardar el track que queremos reproducir
+      pendingTrack = { index, track, autoplay };
       currentIndex = index;
       titleEl.textContent = track.title;
       player.classList.add('is-open');
       setLoading(true);
-      ws.stop();
-      ws.load(track.url).then(() => {
-        if (generation !== loadGeneration) return;
-        setLoading(false);
-        if (autoplay) {
-          ws.play();
-          document.body.classList.add('is-playing');
-        }
-      }).catch((err) => {
-        if (generation !== loadGeneration) return;
-        console.error('Failed to load track:', track.url, err);
-        setLoading(false);
-        titleEl.textContent = 'Failed to load — ' + track.title;
-      });
+      
+      // Cargar el nuevo track
+      ws.load(track.url);
       updateReleaseState();
     };
 
@@ -146,6 +140,13 @@
       durationEl.textContent = fmt(ws.getDuration());
       currentEl.textContent = fmt(0);
       setLoading(false);
+      
+      // Si hay un track pendiente de reproducir, reproducirlo ahora
+      if (pendingTrack && pendingTrack.autoplay) {
+        ws.play();
+        document.body.classList.add('is-playing');
+        pendingTrack = null;
+      }
     });
     ws.on('error', (err) => {
       console.error('Wavesurfer error:', err);

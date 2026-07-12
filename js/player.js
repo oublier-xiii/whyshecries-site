@@ -54,7 +54,26 @@
     const iconVolMute = volIcon.querySelector('.icon-vol-mute');
     const volSlider = player.querySelector('.player-volume input[type=range]');
 
-    let ws = null;
+    // Use default MediaElement backend (NOT WebAudio).
+    // WebAudio creates a suspended AudioContext on iOS that requires
+    // a direct user gesture to resume. Destroying/recreating instances
+    // loses that unlocked state. MediaElement uses a normal <audio> tag
+    // which iOS handles correctly.
+    const ws = WaveSurfer.create({
+      container: waveformEl,
+      waveColor: 'rgba(236, 224, 203, 0.35)',
+      progressColor: 'rgba(196, 30, 34, 0.95)',
+      cursorColor: 'rgba(236, 224, 203, 0.9)',
+      cursorWidth: 1,
+      barWidth: 2,
+      barGap: 2,
+      barRadius: 1,
+      height: 28,
+      normalize: true,
+      interact: true,
+      hideScrollbar: true,
+    });
+
     let currentIndex = -1;
     let isMuted = false;
     let prevVolume = 0.8;
@@ -85,101 +104,87 @@
       });
     };
 
-    const createWaveSurfer = () => {
-      if (ws) {
-        ws.destroy();
-      }
-      ws = WaveSurfer.create({
-        container: waveformEl,
-        waveColor: 'rgba(236, 224, 203, 0.35)',
-        progressColor: 'rgba(196, 30, 34, 0.95)',
-        cursorColor: 'rgba(236, 224, 203, 0.9)',
-        cursorWidth: 1,
-        barWidth: 2,
-        barGap: 2,
-        barRadius: 1,
-        height: 28,
-        normalize: true,
-        interact: true,
-        hideScrollbar: true,
-        backend: 'WebAudio',
-      });
-
-      // Re-attach event listeners
-      ws.on('play', () => {
-        setPlayingUI(true);
-        updateReleaseState();
-        document.body.classList.add('is-playing');
-      });
-      
-      ws.on('pause', () => {
-        setPlayingUI(false);
-        updateReleaseState();
-        document.body.classList.remove('is-playing');
-      });
-      
-      ws.on('finish', () => {
-        setPlayingUI(false);
-        document.body.classList.remove('is-playing');
-        const next = (currentIndex + 1) % tracks.length;
-        loadTrack(next, true);
-      });
-      
-      ws.on('audioprocess', () => { 
-        currentEl.textContent = fmt(ws.getCurrentTime()); 
-      });
-      
-      ws.on('ready', () => {
-        durationEl.textContent = fmt(ws.getDuration());
-        currentEl.textContent = fmt(0);
-        setLoading(false);
-        
-        if (shouldAutoplay) {
-          ws.play();
-        }
-      });
-      
-      ws.on('error', (err) => {
-        console.error('Wavesurfer error:', err);
-        setLoading(false);
-      });
-      
-      ws.on('seeking', () => { 
-        currentEl.textContent = fmt(ws.getCurrentTime()); 
-      });
-    };
-
+    // WaveSurfer v7 internally handles re-entrancy:
+    // - Each load() call increments an internal _loadVersion counter
+    // - After each async step, it checks if _loadVersion still matches
+    // - If a newer load() was called, the old one bails out
+    // - It also calls abortController.abort() to cancel in-flight fetches
+    // - It pauses current playback before loading
+    // So we just call ws.load(url) and let WaveSurfer handle the rest.
     const loadTrack = (index, autoplay = true) => {
       if (index < 0 || index >= tracks.length) return;
       const track = tracks[index];
-      
+
       currentIndex = index;
-      titleEl.textContent = track.title;
       shouldAutoplay = autoplay;
+      titleEl.textContent = track.title;
       player.classList.add('is-open');
       setLoading(true);
-      
-      // Crear nueva instancia de WaveSurfer para cancelar cualquier carga anterior
-      createWaveSurfer();
-      
-      // Cargar el nuevo track
+
+      // Just call load — WaveSurfer cancels any previous in-flight load
       ws.load(track.url);
       updateReleaseState();
     };
+
+    ws.on('play', () => {
+      setPlayingUI(true);
+      updateReleaseState();
+      document.body.classList.add('is-playing');
+    });
+
+    ws.on('pause', () => {
+      setPlayingUI(false);
+      updateReleaseState();
+      document.body.classList.remove('is-playing');
+    });
+
+    ws.on('finish', () => {
+      setPlayingUI(false);
+      document.body.classList.remove('is-playing');
+      const next = (currentIndex + 1) % tracks.length;
+      loadTrack(next, true);
+    });
+
+    ws.on('audioprocess', () => {
+      currentEl.textContent = fmt(ws.getCurrentTime());
+    });
+
+    // 'ready' only fires for the most recent load() call
+    // (older loads bail out before reaching the emit).
+    ws.on('ready', () => {
+      durationEl.textContent = fmt(ws.getDuration());
+      currentEl.textContent = fmt(0);
+      setLoading(false);
+
+      if (shouldAutoplay) {
+        ws.play();
+      }
+    });
+
+    ws.on('error', (err) => {
+      console.error('Wavesurfer error:', err);
+      setLoading(false);
+      titleEl.textContent = 'Error loading track';
+    });
+
+    ws.on('seeking', () => {
+      currentEl.textContent = fmt(ws.getCurrentTime());
+    });
 
     btn.addEventListener('click', () => {
       if (currentIndex === -1) {
         loadTrack(0, true);
         return;
       }
-      if (ws) ws.playPause();
+      ws.playPause();
     });
 
     closeBtn.addEventListener('click', () => {
-      if (ws) ws.pause();
+      ws.pause();
       player.classList.remove('is-open');
       currentIndex = -1;
-      titleEl.textContent = '—';
+      shouldAutoplay = false;
+      titleEl.textContent = '\u2014';
       currentEl.textContent = '0:00';
       durationEl.textContent = '0:00';
       document.querySelectorAll('.rel').forEach((rel) => rel.classList.remove('is-current'));
@@ -187,7 +192,7 @@
 
     volSlider.addEventListener('input', () => {
       const v = parseInt(volSlider.value, 10) / 100;
-      if (ws) ws.setVolume(v);
+      ws.setVolume(v);
       if (v > 0) {
         isMuted = false;
         prevVolume = v;
@@ -200,12 +205,12 @@
       isMuted = !isMuted;
       if (isMuted) {
         prevVolume = parseInt(volSlider.value, 10) / 100 || 0.8;
-        if (ws) ws.setVolume(0);
+        ws.setVolume(0);
         volSlider.value = 0;
         iconVolUp.style.display = 'none';
         iconVolMute.style.display = '';
       } else {
-        if (ws) ws.setVolume(prevVolume);
+        ws.setVolume(prevVolume);
         volSlider.value = Math.round(prevVolume * 100);
         iconVolUp.style.display = '';
         iconVolMute.style.display = 'none';
@@ -218,7 +223,7 @@
         e.preventDefault();
         const idx = parseInt(rel.dataset.track, 10);
         if (!isNaN(idx)) {
-          if (currentIndex === idx && ws && ws.isPlaying()) {
+          if (currentIndex === idx && ws.isPlaying()) {
             ws.pause();
           } else {
             loadTrack(idx, true);
@@ -237,7 +242,7 @@
       if (player.classList.contains('is-open') && currentIndex !== -1) {
         if (e.key === ' ' || e.code === 'Space') {
           e.preventDefault();
-          if (ws) ws.playPause();
+          ws.playPause();
         } else if (e.key === 'm' || e.key === 'M') {
           volIcon.click();
         } else if (e.key === '[') {

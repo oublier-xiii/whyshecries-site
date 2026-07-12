@@ -108,6 +108,7 @@
       titleEl.textContent = track.title;
       player.classList.add('is-open');
       setLoading(true);
+      ws.stop();
       ws.load(track.url).then(() => {
         if (generation !== loadGeneration) return;
         setLoading(false);

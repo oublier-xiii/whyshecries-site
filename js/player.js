@@ -54,26 +54,11 @@
     const iconVolMute = volIcon.querySelector('.icon-vol-mute');
     const volSlider = player.querySelector('.player-volume input[type=range]');
 
-    const ws = WaveSurfer.create({
-      container: waveformEl,
-      waveColor: 'rgba(236, 224, 203, 0.35)',
-      progressColor: 'rgba(196, 30, 34, 0.95)',
-      cursorColor: 'rgba(236, 224, 203, 0.9)',
-      cursorWidth: 1,
-      barWidth: 2,
-      barGap: 2,
-      barRadius: 1,
-      height: 28,
-      normalize: true,
-      interact: true,
-      hideScrollbar: true,
-      backend: 'WebAudio',
-    });
-
+    let ws = null;
     let currentIndex = -1;
     let isMuted = false;
     let prevVolume = 0.8;
-    let pendingTrack = null;
+    let shouldAutoplay = false;
 
     const fmt = (sec) => {
       if (!isFinite(sec)) return '0:00';
@@ -100,70 +85,98 @@
       });
     };
 
+    const createWaveSurfer = () => {
+      if (ws) {
+        ws.destroy();
+      }
+      ws = WaveSurfer.create({
+        container: waveformEl,
+        waveColor: 'rgba(236, 224, 203, 0.35)',
+        progressColor: 'rgba(196, 30, 34, 0.95)',
+        cursorColor: 'rgba(236, 224, 203, 0.9)',
+        cursorWidth: 1,
+        barWidth: 2,
+        barGap: 2,
+        barRadius: 1,
+        height: 28,
+        normalize: true,
+        interact: true,
+        hideScrollbar: true,
+        backend: 'WebAudio',
+      });
+
+      // Re-attach event listeners
+      ws.on('play', () => {
+        setPlayingUI(true);
+        updateReleaseState();
+        document.body.classList.add('is-playing');
+      });
+      
+      ws.on('pause', () => {
+        setPlayingUI(false);
+        updateReleaseState();
+        document.body.classList.remove('is-playing');
+      });
+      
+      ws.on('finish', () => {
+        setPlayingUI(false);
+        document.body.classList.remove('is-playing');
+        const next = (currentIndex + 1) % tracks.length;
+        loadTrack(next, true);
+      });
+      
+      ws.on('audioprocess', () => { 
+        currentEl.textContent = fmt(ws.getCurrentTime()); 
+      });
+      
+      ws.on('ready', () => {
+        durationEl.textContent = fmt(ws.getDuration());
+        currentEl.textContent = fmt(0);
+        setLoading(false);
+        
+        if (shouldAutoplay) {
+          ws.play();
+        }
+      });
+      
+      ws.on('error', (err) => {
+        console.error('Wavesurfer error:', err);
+        setLoading(false);
+      });
+      
+      ws.on('seeking', () => { 
+        currentEl.textContent = fmt(ws.getCurrentTime()); 
+      });
+    };
+
     const loadTrack = (index, autoplay = true) => {
       if (index < 0 || index >= tracks.length) return;
       const track = tracks[index];
       
-      // Detener reproducción anterior inmediatamente
-      ws.stop();
-      
-      // Guardar el track que queremos reproducir
-      pendingTrack = { index, track, autoplay };
       currentIndex = index;
       titleEl.textContent = track.title;
+      shouldAutoplay = autoplay;
       player.classList.add('is-open');
       setLoading(true);
+      
+      // Crear nueva instancia de WaveSurfer para cancelar cualquier carga anterior
+      createWaveSurfer();
       
       // Cargar el nuevo track
       ws.load(track.url);
       updateReleaseState();
     };
 
-    ws.on('play', () => {
-      setPlayingUI(true);
-      updateReleaseState();
-      document.body.classList.add('is-playing');
-    });
-    ws.on('pause', () => {
-      setPlayingUI(false);
-      updateReleaseState();
-      document.body.classList.remove('is-playing');
-    });
-    ws.on('finish', () => {
-      setPlayingUI(false);
-      document.body.classList.remove('is-playing');
-      const next = (currentIndex + 1) % tracks.length;
-      loadTrack(next, true);
-    });
-    ws.on('audioprocess', () => { currentEl.textContent = fmt(ws.getCurrentTime()); });
-    ws.on('ready', () => {
-      durationEl.textContent = fmt(ws.getDuration());
-      currentEl.textContent = fmt(0);
-      setLoading(false);
-      
-      // Si hay un track pendiente de reproducir, reproducirlo ahora
-      if (pendingTrack && pendingTrack.autoplay) {
-        ws.play();
-        document.body.classList.add('is-playing');
-        pendingTrack = null;
-      }
-    });
-    ws.on('error', (err) => {
-      console.error('Wavesurfer error:', err);
-      setLoading(false);
-    });
-    ws.on('seeking', () => { currentEl.textContent = fmt(ws.getCurrentTime()); });
-
     btn.addEventListener('click', () => {
       if (currentIndex === -1) {
         loadTrack(0, true);
         return;
       }
-      ws.playPause();
+      if (ws) ws.playPause();
     });
 
     closeBtn.addEventListener('click', () => {
-      ws.pause();
+      if (ws) ws.pause();
       player.classList.remove('is-open');
       currentIndex = -1;
       titleEl.textContent = '—';
@@ -174,7 +187,7 @@
 
     volSlider.addEventListener('input', () => {
       const v = parseInt(volSlider.value, 10) / 100;
-      ws.setVolume(v);
+      if (ws) ws.setVolume(v);
       if (v > 0) {
         isMuted = false;
         prevVolume = v;
@@ -187,12 +200,12 @@
       isMuted = !isMuted;
       if (isMuted) {
         prevVolume = parseInt(volSlider.value, 10) / 100 || 0.8;
-        ws.setVolume(0);
+        if (ws) ws.setVolume(0);
         volSlider.value = 0;
         iconVolUp.style.display = 'none';
         iconVolMute.style.display = '';
       } else {
-        ws.setVolume(prevVolume);
+        if (ws) ws.setVolume(prevVolume);
         volSlider.value = Math.round(prevVolume * 100);
         iconVolUp.style.display = '';
         iconVolMute.style.display = 'none';
@@ -205,7 +218,7 @@
         e.preventDefault();
         const idx = parseInt(rel.dataset.track, 10);
         if (!isNaN(idx)) {
-          if (currentIndex === idx && ws.isPlaying()) {
+          if (currentIndex === idx && ws && ws.isPlaying()) {
             ws.pause();
           } else {
             loadTrack(idx, true);
@@ -224,7 +237,7 @@
       if (player.classList.contains('is-open') && currentIndex !== -1) {
         if (e.key === ' ' || e.code === 'Space') {
           e.preventDefault();
-          ws.playPause();
+          if (ws) ws.playPause();
         } else if (e.key === 'm' || e.key === 'M') {
           volIcon.click();
         } else if (e.key === '[') {
